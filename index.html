@@ -1,1 +1,1013 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>রমজান ক্যালেন্ডার ২০২৬</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Amiri:wght@400;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Alpine.js -->
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.3/dist/cdn.min.js" defer></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Hind Siliguri"', 'sans-serif'],
+                        arabic: ['"Amiri"', 'serif'],
+                        english: ['"Inter"', 'sans-serif'],
+                    },
+                    colors: {
+                        emerald: {
+                            850: '#022c22',
+                        },
+                        oi: {
+                            black: '#1a1a1a',
+                            blue: '#4285f4',
+                            gray: '#666666'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
 
+    <style>
+        [x-cloak] { display: none !important; }
+        body { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+        
+        /* Glassmorphism */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+        
+        /* Tab Transitions */
+        .tab-content { animation: fadeIn 0.4s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+        /* Print Styles */
+        @media print {
+            .no-print { display: none !important; }
+            .print-only { display: block !important; }
+            body { background: white; color: black; }
+            .glass-panel, .glass-card, .bg-white, .shadow-xl { 
+                box-shadow: none !important; 
+                border: 1px solid #ddd !important; 
+                background: white !important; 
+                backdrop-filter: none !important;
+            }
+            table { width: 100%; border-collapse: collapse; font-size: 10pt; }
+            th, td { border: 1px solid #000; padding: 4px; color: black !important; page-break-inside: avoid; }
+            h1, h2, h3 { color: black !important; }
+            tr { page-break-inside: avoid; }
+        }
+        
+        /* Button Press Effect */
+        .btn-press:active { transform: scale(0.95); }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans" x-data="ramadanApp()">
+
+    <!-- TOP BAR -->
+    <div class="bg-emerald-900 text-emerald-50 py-2 px-4 text-center text-sm relative overflow-hidden no-print">
+        <div class="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/arabesque.png')]"></div>
+        <div class="relative z-10 flex justify-between items-center max-w-6xl mx-auto">
+            <span class="text-xs opacity-75 font-medium">হিজরী ১৪৪৭</span>
+            <span class="text-xs opacity-75 font-medium">২০২৬</span>
+        </div>
+    </div>
+
+    <!-- HEADER & HERO -->
+    <header class="relative bg-emerald-800 pb-28 pt-12 overflow-hidden no-print">
+        <!-- Decorative Background -->
+        <div class="absolute top-0 left-0 w-full h-full overflow-hidden opacity-20 pointer-events-none">
+            <div class="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-emerald-400 blur-3xl mix-blend-overlay"></div>
+            <div class="absolute top-1/2 -left-24 w-72 h-72 rounded-full bg-blue-500 blur-3xl mix-blend-overlay"></div>
+        </div>
+
+        <div class="max-w-6xl mx-auto px-4 relative z-10">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-8">
+                
+                <!-- Title & District -->
+                <div class="text-center md:text-left space-y-6 max-w-2xl">
+                    <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-700/50 border border-emerald-500/30 text-emerald-100 text-xs font-semibold tracking-wider uppercase backdrop-blur-md">
+                        <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
+                        পবিত্র মাহে রমজান
+                    </span>
+                    <h1 class="text-4xl md:text-6xl font-bold text-white leading-tight drop-shadow-md">
+                        তাকওয়ায় আলোকিত হোক <br/> <span class="text-emerald-300">আপনার জীবন</span>
+                    </h1>
+                    
+                    <!-- District Selector -->
+                    <div class="bg-emerald-900/40 backdrop-blur-md p-2 pl-4 rounded-xl border border-emerald-500/30 inline-flex flex-col sm:flex-row items-center gap-3">
+                        <span class="text-emerald-200 text-sm font-medium">আপনার জেলা নির্বাচন করুন:</span>
+                        <div class="relative">
+                            <select x-model="selectedDistrict" @change="saveDistrict()" autocomplete="off"
+                                    class="bg-emerald-100 text-emerald-900 font-bold rounded-lg pl-3 pr-8 py-2 outline-none focus:ring-2 focus:ring-emerald-400 appearance-none cursor-pointer hover:bg-white transition-colors w-48">
+                                <template x-for="d in districts" :key="d.name">
+                                    <option :value="d.name" x-text="d.name" :selected="d.name === selectedDistrict"></option>
+                                </template>
+                            </select>
+                            <svg class="w-4 h-4 absolute right-2 top-1/2 -translate-y-1/2 text-emerald-700 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Clock / Countdown Card -->
+                <div class="relative group mt-4 md:mt-0">
+                    <div class="absolute inset-0 bg-emerald-400 rounded-[2rem] blur opacity-20 group-hover:opacity-40 transition-opacity"></div>
+                    <div class="glass-panel rounded-[2rem] p-6 text-center w-full md:w-80 shadow-2xl relative">
+                        <!-- Date Display -->
+                        <div class="text-emerald-800 font-bold text-lg mb-2 border-b border-emerald-200/50 pb-2" x-text="currentDateString"></div>
+
+                        <!-- Real Time Clock with Seconds & English AM/PM -->
+                        <div class="flex justify-center items-baseline gap-2 mb-2">
+                            <span class="text-4xl lg:text-5xl font-mono font-bold text-emerald-900 tracking-tight" x-text="timeDigits"></span>
+                            <span class="text-lg font-bold text-emerald-700 font-english uppercase tracking-wider" x-text="timeAmpm"></span>
+                        </div>
+                        <div class="h-px w-full bg-emerald-200/50 my-4"></div>
+                        
+                        <div x-show="!countdownText.includes('শুরু হয়নি') && !countdownText.includes('শেষ')" class="space-y-1">
+                            <p class="text-slate-500 text-xs font-bold uppercase tracking-widest" x-text="nextEventName + ' বাকি'"></p>
+                            <p class="text-2xl font-bold text-emerald-600 animate-pulse font-mono" x-text="countdownText"></p>
+                        </div>
+                        <div x-show="countdownText.includes('শুরু হয়নি')" class="text-orange-600 font-bold animate-pulse">
+                            রমজান এখনও শুরু হয়নি
+                        </div>
+                         <div x-show="countdownText.includes('শেষ')" class="text-slate-400 font-bold">
+                            ঈদ মোবারক!
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Wave Divider -->
+        <div class="absolute bottom-0 left-0 w-full overflow-hidden leading-none rotate-180">
+            <svg class="relative block w-[calc(100%+1.3px)] h-[60px] text-slate-50" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" fill="currentColor"></path>
+            </svg>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 -mt-16 relative z-20 pb-20">
+        
+        <!-- MAIN TABS NAVIGATION -->
+        <div class="flex flex-wrap justify-center gap-4 mb-10 no-print relative z-30">
+            <button @click="activeTab = 'calendar'" 
+                    class="px-6 md:px-8 py-4 rounded-2xl font-bold text-base md:text-lg transition-all duration-300 transform hover:-translate-y-1 shadow-lg flex items-center gap-2"
+                    :class="activeTab === 'calendar' ? 'bg-emerald-600 text-white shadow-emerald-200 ring-4 ring-emerald-100' : 'bg-white text-slate-600 hover:bg-slate-50'">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                রমজান ক্যালেন্ডার
+            </button>
+            <button @click="activeTab = 'deeds'" 
+                    class="px-6 md:px-8 py-4 rounded-2xl font-bold text-base md:text-lg transition-all duration-300 transform hover:-translate-y-1 shadow-lg flex items-center gap-2"
+                    :class="activeTab === 'deeds' ? 'bg-emerald-600 text-white shadow-emerald-200 ring-4 ring-emerald-100' : 'bg-white text-slate-600 hover:bg-slate-50'">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path></svg>
+                দৈনন্দিন আমল
+            </button>
+            <button @click="activeTab = 'tasbeeh'" 
+                    class="px-6 md:px-8 py-4 rounded-2xl font-bold text-base md:text-lg transition-all duration-300 transform hover:-translate-y-1 shadow-lg flex items-center gap-2"
+                    :class="activeTab === 'tasbeeh' ? 'bg-emerald-600 text-white shadow-emerald-200 ring-4 ring-emerald-100' : 'bg-white text-slate-600 hover:bg-slate-50'">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z"></path></svg>
+                ডিজিটাল তসবিহ
+            </button>
+        </div>
+
+        <!-- TAB 1: CALENDAR -->
+        <div x-show="activeTab === 'calendar'" class="tab-content" x-cloak>
+            <!-- Dashboard Summary (Today) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12 no-print">
+                <!-- Date Card -->
+                <div class="bg-white rounded-3xl p-5 shadow-xl border border-slate-100 flex items-center gap-4 hover:-translate-y-1 transition-transform duration-300">
+                    <div class="w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-600 flex items-center justify-center flex-shrink-0">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                    </div>
+                    <div>
+                        <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">আজকের দিন</p>
+                        <h3 class="text-xl font-bold text-slate-800" x-text="todayData ? toBn(todayData.day) + ' রমজান' : 'রমজান শুরু হয়নি'"></h3>
+                        <p class="text-xs text-emerald-600 font-medium" x-text="todayData ? bnDay(todayData.dayName) : '---'"></p>
+                    </div>
+                </div>
+
+                <!-- Sehri Card -->
+                <div class="bg-white rounded-3xl p-5 shadow-xl border border-slate-100 flex items-center gap-4 hover:-translate-y-1 transition-transform duration-300">
+                    <div class="w-12 h-12 rounded-2xl bg-blue-100 text-blue-600 flex items-center justify-center flex-shrink-0">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+                    </div>
+                    <div>
+                        <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">সেহরি শেষ</p>
+                        <h3 class="text-2xl font-bold text-blue-600 font-mono" x-text="todayData ? toBn(adjustTime(todayData.sehri)) : '--:--'"></h3>
+                    </div>
+                </div>
+
+                 <!-- Fajr Card -->
+                 <div class="bg-white rounded-3xl p-5 shadow-xl border border-slate-100 flex items-center gap-4 hover:-translate-y-1 transition-transform duration-300">
+                    <div class="w-12 h-12 rounded-2xl bg-cyan-100 text-cyan-600 flex items-center justify-center flex-shrink-0">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    </div>
+                    <div>
+                        <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">ফজরের আযান</p>
+                        <h3 class="text-2xl font-bold text-cyan-600 font-mono" x-text="todayData ? toBn(adjustTime(todayData.fajr)) : '--:--'"></h3>
+                    </div>
+                </div>
+
+                <!-- Iftar Card -->
+                <div class="bg-white rounded-3xl p-5 shadow-xl border border-slate-100 flex items-center gap-4 hover:-translate-y-1 transition-transform duration-300">
+                    <div class="w-12 h-12 rounded-2xl bg-orange-100 text-orange-600 flex items-center justify-center flex-shrink-0">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.343l-.707-.707M12 5a7 7 0 100 14 7 7 0 000-14z"></path></svg>
+                    </div>
+                    <div>
+                        <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">ইফতার শুরু</p>
+                        <h3 class="text-2xl font-bold text-orange-600 font-mono" x-text="todayData ? toBn(adjustTime(todayData.iftar)) : '--:--'"></h3>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dua Section -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12 no-print">
+                <!-- Niyat -->
+                <div class="bg-white rounded-3xl overflow-hidden shadow-lg border border-emerald-100 group hover:shadow-2xl transition-all duration-300">
+                    <div class="bg-emerald-50 px-8 py-4 border-b border-emerald-100 flex justify-between items-center">
+                        <h3 class="text-lg font-bold text-emerald-800">রোজার নিয়ত</h3>
+                        <div class="w-8 h-8 rounded-full bg-emerald-200 flex items-center justify-center text-emerald-700 text-xs font-bold">১</div>
+                    </div>
+                    <div class="p-8">
+                        <p class="font-arabic text-2xl md:text-3xl text-slate-800 text-center leading-loose mb-6">نويت أن أصوم غدا من شهر رمضان المبارك فرضا لك يا الله فتقبل مني إنك أنت السميع العليم</p>
+                        <div class="space-y-3 text-center">
+                            <p class="text-slate-600 font-medium"><strong>উচ্চারণ:</strong> নাওয়াইতু আন আছুমা গাদাম মিন শাহরি রামাদ্বানাল মুবারাকি ফারদ্বাল্লাকা ইয়া আল্লাহু ফাতাক্বাব্বাল মিন্নী ইন্নাকা আনতাস সামীউল আলীম।</p>
+                            <p class="text-slate-500 italic text-sm">"হে আল্লাহ! আগামীকাল রমজান মাসে তোমার পক্ষ হতে নির্ধারিত ফরজ রোজা রাখার নিয়ত করলাম। তুমি তা কবুল কর।"</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Iftar Dua -->
+                <div class="bg-white rounded-3xl overflow-hidden shadow-lg border border-orange-100 group hover:shadow-2xl transition-all duration-300">
+                    <div class="bg-orange-50 px-8 py-4 border-b border-orange-100 flex justify-between items-center">
+                        <h3 class="text-lg font-bold text-orange-800">ইফতারের দোয়া</h3>
+                        <div class="w-8 h-8 rounded-full bg-orange-200 flex items-center justify-center text-orange-700 text-xs font-bold">২</div>
+                    </div>
+                    <div class="p-8">
+                        <p class="font-arabic text-2xl md:text-3xl text-slate-800 text-center leading-loose mb-6">اللهم لك صمت وعلى رزقك أفطرت</p>
+                        <div class="space-y-3 text-center">
+                            <p class="text-slate-600 font-medium"><strong>উচ্চারণ:</strong> আল্লাহুম্মা লাকা সুমতু ওয়া আলা রিযক্বিকা আফতারতু।</p>
+                            <p class="text-slate-500 italic text-sm">"হে আল্লাহ! আমি তোমারই সন্তুষ্টির জন্য রোজা রেখেছি এবং তোমারই দেয়া রিযিক দ্বারা ইফতার করছি।"</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Schedule Section -->
+            <div class="bg-white rounded-3xl shadow-xl border border-slate-200 overflow-hidden" id="schedule-area">
+                <!-- Controls -->
+                <div class="p-6 md:p-10 border-b border-slate-100 bg-slate-50 flex flex-col xl:flex-row justify-between items-center gap-6 no-print">
+                    <div>
+                        <h2 class="text-2xl md:text-3xl font-bold text-slate-800">সময়সূচী ২০২৬</h2>
+                        <p class="text-slate-500 text-sm mt-1">সরাসরি তারিখ বা দিন দিয়ে খুঁজুন অথবা ১০ দিন করে দেখুন</p>
+                    </div>
+                    
+                    <!-- Ashra Filters -->
+                    <div class="flex flex-wrap justify-center gap-2">
+                        <button @click="ashraFilter = 'all'" 
+                                class="px-4 py-2 rounded-lg font-bold text-sm transition-colors"
+                                :class="ashraFilter === 'all' ? 'bg-slate-800 text-white' : 'bg-slate-200 text-slate-600 hover:bg-slate-300'">
+                            সম্পূর্ণ মাস
+                        </button>
+                        <button @click="ashraFilter = 1" 
+                                class="px-4 py-2 rounded-lg font-bold text-sm transition-colors"
+                                :class="ashraFilter === 1 ? 'bg-emerald-600 text-white' : 'bg-emerald-100 text-emerald-700 hover:bg-emerald-200'">
+                            রহমত
+                        </button>
+                        <button @click="ashraFilter = 2" 
+                                class="px-4 py-2 rounded-lg font-bold text-sm transition-colors"
+                                :class="ashraFilter === 2 ? 'bg-blue-600 text-white' : 'bg-blue-100 text-blue-700 hover:bg-blue-200'">
+                            মাগফিরাত
+                        </button>
+                        <button @click="ashraFilter = 3" 
+                                class="px-4 py-2 rounded-lg font-bold text-sm transition-colors"
+                                :class="ashraFilter === 3 ? 'bg-purple-600 text-white' : 'bg-purple-100 text-purple-700 hover:bg-purple-200'">
+                            নাজাত
+                        </button>
+                    </div>
+
+                    <div class="flex gap-2 w-full xl:w-auto">
+                        <div class="relative w-full xl:w-64">
+                            <input type="text" x-model="search" placeholder="খুঁজুন (যেমন: ১০)" 
+                                class="w-full pl-10 pr-4 py-3 bg-white rounded-xl shadow-sm border border-slate-200 focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 outline-none transition-all text-sm">
+                            <svg class="w-5 h-5 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                        </div>
+                        <button onclick="window.print()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 p-3 rounded-xl transition-colors" title="Print">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- DESKTOP TABLE -->
+                <div class="hidden md:block overflow-x-auto">
+                    <table class="w-full border-collapse text-left">
+                        <thead>
+                            <tr class="bg-slate-50 border-b border-slate-200 text-base font-bold text-slate-600 uppercase tracking-wider">
+                                <th class="py-5 px-6 text-center">রমজান</th>
+                                <th class="py-5 px-6">তারিখ ও বার</th>
+                                <th class="py-5 px-6">সেহরি শেষ</th>
+                                <th class="py-5 px-6 text-cyan-700">ফজরের আযান</th>
+                                <th class="py-5 px-6">ইফতার শুরু</th>
+                                <th class="py-5 px-6 text-center">পর্যায় (Ashra)</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100">
+                            <template x-for="item in filteredData" :key="item.day">
+                                <tr :class="{
+                                    'bg-yellow-50 border-l-4 border-yellow-500 shadow-sm': isToday(item.date),
+                                    'bg-emerald-50/40 hover:bg-emerald-100/50': !isToday(item.date) && item.phase === 'Rehmat',
+                                    'bg-blue-50/40 hover:bg-blue-100/50': !isToday(item.date) && item.phase === 'Magfirat',
+                                    'bg-purple-50/40 hover:bg-purple-100/50': !isToday(item.date) && item.phase === 'Nazat'
+                                }" class="transition-all border-b border-slate-100">
+                                    <td class="py-4 px-6 text-center">
+                                        <span class="inline-flex items-center justify-center w-10 h-10 rounded-full font-bold text-lg"
+                                            :class="isToday(item.date) ? 'bg-yellow-500 text-white shadow-md shadow-yellow-200' : 'bg-white text-slate-600 shadow-sm'" 
+                                            x-text="toBn(item.day)"></span>
+                                    </td>
+                                    <td class="py-4 px-6">
+                                        <div class="font-bold text-slate-800" x-text="toBn(item.date)"></div>
+                                        <div class="text-sm font-semibold text-slate-500 uppercase" x-text="bnDay(item.dayName)"></div>
+                                    </td>
+                                    <td class="py-4 px-6">
+                                        <span class="text-xl font-mono font-bold text-blue-600 bg-white/60 px-3 py-1 rounded-lg" x-text="toBn(adjustTime(item.sehri))"></span>
+                                    </td>
+                                    <td class="py-4 px-6">
+                                        <span class="text-xl font-mono font-bold text-cyan-600 bg-white/60 px-3 py-1 rounded-lg" x-text="toBn(adjustTime(item.fajr))"></span>
+                                    </td>
+                                    <td class="py-4 px-6">
+                                        <span class="text-xl font-mono font-bold text-orange-600 bg-white/60 px-3 py-1 rounded-lg" x-text="toBn(adjustTime(item.iftar))"></span>
+                                    </td>
+                                    <td class="py-4 px-6 text-center">
+                                        <span class="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide border shadow-sm" 
+                                            :class="{
+                                                'bg-emerald-100 text-emerald-700 border-emerald-200': item.phase === 'Rehmat',
+                                                'bg-blue-100 text-blue-700 border-blue-200': item.phase === 'Magfirat',
+                                                'bg-purple-100 text-purple-700 border-purple-200': item.phase === 'Nazat'
+                                            }"
+                                            x-text="bnPhase(item.phase)"></span>
+                                    </td>
+                                </tr>
+                            </template>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- MOBILE CARDS -->
+                <div class="md:hidden space-y-4 p-4">
+                    <template x-for="item in filteredData" :key="item.day">
+                        <div class="p-5 rounded-2xl border transition-all"
+                            :class="{
+                                'bg-yellow-50 border-yellow-500 ring-1 ring-yellow-500 shadow-md': isToday(item.date),
+                                'bg-emerald-50/50 border-emerald-100': !isToday(item.date) && item.phase === 'Rehmat',
+                                'bg-blue-50/50 border-blue-100': !isToday(item.date) && item.phase === 'Magfirat',
+                                'bg-purple-50/50 border-purple-100': !isToday(item.date) && item.phase === 'Nazat'
+                            }">
+                            
+                            <div class="flex justify-between items-start mb-4">
+                                <div class="flex items-center gap-3">
+                                    <span class="flex items-center justify-center w-10 h-10 rounded-xl font-bold shadow-sm"
+                                        :class="isToday(item.date) ? 'bg-yellow-500 text-white' : 'bg-white text-slate-600'" 
+                                        x-text="toBn(item.day)"></span>
+                                    <div>
+                                        <div class="font-bold text-slate-800" x-text="toBn(item.date)"></div>
+                                        <div class="text-xs text-slate-500" x-text="bnDay(item.dayName)"></div>
+                                    </div>
+                                </div>
+                                <span class="px-2 py-1 rounded-md text-[10px] font-bold uppercase border bg-white/60" 
+                                    :class="{
+                                        'text-emerald-700 border-emerald-200': item.phase === 'Rehmat',
+                                        'text-blue-700 border-blue-200': item.phase === 'Magfirat',
+                                        'text-purple-700 border-purple-200': item.phase === 'Nazat'
+                                    }"
+                                    x-text="bnPhase(item.phase)"></span>
+                            </div>
+                            
+                            <div class="grid grid-cols-3 gap-2">
+                                <div class="bg-white/60 p-2 rounded-xl text-center border border-slate-100">
+                                    <div class="text-xs uppercase text-slate-400 font-bold mb-1">সেহরি শেষ</div>
+                                    <div class="text-base font-mono font-bold text-blue-600" x-text="toBn(adjustTime(item.sehri))"></div>
+                                </div>
+                                <div class="bg-white/60 p-2 rounded-xl text-center border border-slate-100">
+                                    <div class="text-xs uppercase text-cyan-600/70 font-bold mb-1">ফজরের আযান</div>
+                                    <div class="text-base font-mono font-bold text-cyan-700" x-text="toBn(adjustTime(item.fajr))"></div>
+                                </div>
+                                <div class="bg-white/60 p-2 rounded-xl text-center border border-slate-100">
+                                    <div class="text-xs uppercase text-slate-400 font-bold mb-1">ইফতার শুরু</div>
+                                    <div class="text-base font-mono font-bold text-orange-600" x-text="toBn(adjustTime(item.iftar))"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 2: DAILY DEEDS (INTERACTIVE) -->
+        <div x-show="activeTab === 'deeds'" class="tab-content" x-cloak>
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center mb-10">
+                    <h2 class="text-3xl md:text-4xl font-bold text-slate-800 mb-2">প্রতিদিনের আমল ও হাদিস</h2>
+                    <p class="text-slate-500">প্রতিদিনের আমল শেষ করে টিক মার্ক দিন</p>
+                </div>
+
+                <!-- PROGRESS BAR SECTION -->
+                <div class="bg-white p-6 rounded-2xl shadow-lg border border-slate-100 mb-8 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-emerald-50 rounded-full -mr-10 -mt-10 opacity-50 pointer-events-none"></div>
+                    
+                    <div class="flex justify-between items-end mb-3 relative z-10">
+                        <div>
+                            <p class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">আপনার অগ্রগতি</p>
+                            <div class="flex items-baseline gap-1">
+                                <span class="text-4xl font-bold text-emerald-600" x-text="toBn(progressPercentage)"></span>
+                                <span class="text-xl font-bold text-emerald-600">%</span>
+                                <span class="text-slate-500 font-medium ml-1">সম্পন্ন</span>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                             <button @click="resetDeeds()" class="text-xs text-red-500 hover:text-red-700 underline font-semibold mb-1 cursor-pointer">রিসেট করুন</button>
+                             <div class="block">
+                                <span class="text-lg font-bold text-slate-700" x-text="toBn(completedDeeds.length)"></span>
+                                <span class="text-slate-400 text-sm">/</span>
+                                <span class="text-sm font-bold text-slate-500" x-text="toBn(dailyDeeds.length)"></span>
+                                <span class="text-xs text-slate-400 block mt-0.5">টি আমল</span>
+                             </div>
+                        </div>
+                    </div>
+                    
+                    <div class="w-full bg-slate-100 rounded-full h-4 overflow-hidden relative z-10 shadow-inner">
+                        <div class="bg-gradient-to-r from-emerald-500 to-emerald-400 h-full rounded-full transition-all duration-700 ease-out flex items-center justify-end pr-1"
+                             :style="`width: ${progressPercentage}%`">
+                             <div class="w-1.5 h-1.5 bg-white/30 rounded-full" x-show="progressPercentage > 0"></div>
+                        </div>
+                    </div>
+                    
+                    <p class="text-center text-xs text-slate-400 mt-4 font-medium" x-show="progressPercentage === 100">
+                        মাশাআল্লাহ! আপনি সবকটি আমল সম্পন্ন করেছেন।
+                    </p>
+                </div>
+
+                <div class="space-y-6">
+                    <template x-for="(deed, index) in dailyDeeds" :key="index">
+                        <div @click="toggleDeed(index)" 
+                             class="bg-white rounded-2xl p-6 shadow-sm border transition-all cursor-pointer group select-none relative overflow-hidden"
+                             :class="isDeedCompleted(index) ? 'border-emerald-500 bg-emerald-50/30' : 'border-slate-100 hover:shadow-md hover:border-emerald-200'">
+                            
+                            <!-- Checkmark Indicator -->
+                            <div class="absolute top-4 right-4 w-6 h-6 rounded-full border-2 flex items-center justify-center transition-colors"
+                                 :class="isDeedCompleted(index) ? 'bg-emerald-500 border-emerald-500 text-white' : 'border-slate-300 text-transparent group-hover:border-emerald-400'">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                            </div>
+
+                            <div class="flex gap-4 items-start pr-10">
+                                <div class="flex-shrink-0 w-12 h-12 rounded-xl flex items-center justify-center font-bold text-xl shadow-sm border transition-colors"
+                                     :class="isDeedCompleted(index) ? 'bg-emerald-500 text-white border-emerald-500' : 'bg-emerald-100 text-emerald-700 border-emerald-200'">
+                                    <span x-text="toBn(index + 1)"></span>
+                                </div>
+                                <div class="flex-grow" :class="isDeedCompleted(index) ? 'opacity-75' : 'opacity-100'">
+                                    <div class="flex items-center gap-2 mb-2">
+                                        <span class="text-xs font-bold uppercase tracking-wider text-emerald-600 bg-emerald-50 px-2 py-1 rounded-md" x-text="deed.ref"></span>
+                                        <span x-show="isDeedCompleted(index)" class="text-xs font-bold text-emerald-600 animate-pulse">সম্পন্ন হয়েছে</span>
+                                    </div>
+                                    <h3 class="text-xl font-bold text-slate-800 leading-relaxed" 
+                                        :class="isDeedCompleted(index) ? 'line-through text-slate-500' : ''"
+                                        x-text="deed.task"></h3>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-4 bg-slate-50 rounded-xl p-4 border border-slate-100 relative overflow-hidden"
+                                 :class="isDeedCompleted(index) ? 'opacity-50' : ''">
+                                <!-- Replaced Quote Mark with Open Book Icon -->
+                                <div class="absolute top-3 left-3 text-slate-300 select-none pointer-events-none">
+                                    <svg class="w-6 h-6 opacity-60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                                    </svg>
+                                </div>
+                                <p class="text-slate-600 italic text-sm pl-8 pt-0.5 leading-relaxed relative z-10" x-text="deed.hadith"></p>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 3: DIGITAL TASBEEH -->
+        <div x-show="activeTab === 'tasbeeh'" class="tab-content" x-cloak>
+            <div class="max-w-md mx-auto py-10">
+                <div class="bg-white rounded-[3rem] shadow-2xl border border-slate-200 p-8 text-center relative overflow-hidden">
+                    <div class="absolute inset-0 bg-emerald-50/50 pointer-events-none"></div>
+                    
+                    <h2 class="text-2xl font-bold text-slate-800 relative z-10 mb-8">ডিজিটাল তসবিহ</h2>
+                    
+                    <!-- Display -->
+                    <div class="bg-slate-800 rounded-2xl p-6 mb-8 shadow-inner relative z-10 border-4 border-slate-300">
+                        <div class="text-6xl font-mono font-bold text-emerald-400 tabular-nums" x-text="toBn(tasbeehCount)"></div>
+                        <div class="text-xs text-slate-500 mt-2 uppercase tracking-widest">মোট পাঠ</div>
+                    </div>
+                    
+                    <!-- Controls -->
+                    <div class="relative z-10 flex flex-col items-center gap-6">
+                        <button @click="incrementTasbeeh()" 
+                                class="w-32 h-32 rounded-full bg-emerald-600 text-white shadow-xl shadow-emerald-200 flex items-center justify-center btn-press transition-all hover:bg-emerald-500 active:scale-95 border-4 border-emerald-100">
+                            <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
+                        </button>
+                        
+                        <button @click="resetTasbeeh()" 
+                                class="text-sm text-slate-400 hover:text-red-500 font-bold uppercase tracking-wider transition-colors flex items-center gap-2">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                            রিসেট করুন
+                        </button>
+                    </div>
+
+                    <div class="mt-8 relative z-10 text-sm text-slate-500">
+                        <p>সুবহানাল্লাহ • আলহামদুলিল্লাহ • আল্লাহু আকবার</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="mt-20 text-center border-t border-slate-200 pt-16 pb-16 no-print bg-white relative overflow-hidden">
+             <!-- Background pattern -->
+            <div class="absolute inset-0 opacity-5 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
+
+            <div class="flex flex-col items-center max-w-4xl mx-auto px-6 relative z-10">
+                
+                <!-- Humorous Section (The "Funny Part") -->
+                <div class="bg-gradient-to-br from-yellow-50 to-orange-50 rounded-3xl p-8 w-full max-w-3xl border-2 border-yellow-200 shadow-xl mb-10 transform -rotate-1 hover:rotate-0 transition-transform duration-300">
+                    <div class="absolute -top-5 -right-5 w-16 h-16 bg-yellow-400 rounded-full flex items-center justify-center text-3xl shadow-lg animate-bounce">
+                        🤣
+                    </div>
+                    
+                    <h3 class="text-xl font-bold text-yellow-800 mb-4 font-sans">⚠ জনস্বার্থে বিশেষ ঘোষণা</h3>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
+                        <div class="bg-white/60 p-4 rounded-xl border border-yellow-100">
+                            <h4 class="font-bold text-yellow-900 mb-2 flex items-center gap-2">
+                                <span class="text-xl">⏰</span> সেহরি অ্যালার্ম
+                            </h4>
+                            <p class="text-slate-700 text-sm">এই অ্যাপ আপনার ঘুম ভাঙাবে না। সেহরির জন্য দয়া করে আম্মুকে বলে রাখুন অথবা ৫টি অ্যালার্ম দিন। মিস করলে কর্তৃপক্ষ দায়ী নয়!</p>
+                        </div>
+                        
+                        <div class="bg-white/60 p-4 rounded-xl border border-yellow-100">
+                             <h4 class="font-bold text-yellow-900 mb-2 flex items-center gap-2">
+                                <span class="text-xl">🍟</span> ইফতার স্পেশাল
+                            </h4>
+                            <p class="text-slate-700 text-sm">ইফতারের ১০ মিনিট আগে এই অ্যাপ বারবার চেক করা স্বাস্থ্যের জন্য ক্ষতিকর। এতে সময় আরও ধীরে চলে বলে মনে হতে পারে।</p>
+                        </div>
+                        
+                         <div class="bg-white/60 p-4 rounded-xl border border-yellow-100 md:col-span-2">
+                             <h4 class="font-bold text-yellow-900 mb-2 flex items-center gap-2">
+                                <span class="text-xl">🐛</span> বাগ (Bug) রিপোর্ট
+                            </h4>
+                            <p class="text-slate-700 text-sm">অ্যাপে কোনো ভুল বা 'বাগ' খুঁজে পেলে রাগ করবেন না। মনে রাখবেন, মানুষ মাত্রই ভুল, আর ডেভেলপার মাত্রই 'ইফতারের দাওয়াত' প্রত্যাশী। দাওয়াত দিলে বাগ ফিক্স ফ্রি!</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Habib Karim Section -->
+                <div class="mt-8 pt-8 border-t border-slate-200 w-full max-w-2xl">
+                    <div class="bg-slate-900 text-slate-300 rounded-2xl p-6 shadow-2xl relative overflow-hidden group hover:scale-[1.02] transition-transform duration-300 cursor-default">
+                        <!-- Shining effect -->
+                        <div class="absolute top-0 -left-[100%] w-full h-full bg-gradient-to-r from-transparent via-white/10 to-transparent group-hover:animate-[shimmer_2s_infinite]"></div>
+                        
+                        <p class="font-bold text-lg mb-2">
+                            Powered by <span class="text-emerald-400 font-black text-xl tracking-wide">Habib Karim</span> 🚀
+                        </p>
+                        <p class="text-slate-400 text-sm italic mb-6">
+                            "For any kind of assistance <span class="text-yellow-400 font-bold underline decoration-wavy">pay first</span> as i'm broke 💸"
+                        </p>
+
+                        <button @click="showDonateModal = true" 
+                                class="inline-flex items-center gap-2 px-6 py-3 bg-emerald-600 hover:bg-emerald-500 text-white rounded-full font-bold text-sm transition-all shadow-lg hover:shadow-emerald-500/30 active:scale-95 group-hover:animate-pulse">
+                            <span>💳</span> Send Money (Emergency)
+                        </button>
+                    </div>
+                </div>
+
+                <div class="text-slate-400 text-xs mt-8 space-y-2">
+                     <p>Crafted with ❤️ and too much Tea during late nights.</p>
+                     <p class="opacity-75">* ইসলামিক ফাউন্ডেশন বাংলাদেশ কর্তৃক নির্ধারিত সময়সূচী অনুযায়ী।</p>
+                </div>
+
+            </div>
+        </footer>
+
+        <!-- Custom Reset Confirmation Modal -->
+        <div x-show="showResetModal" 
+             class="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm"
+             x-transition:enter="transition ease-out duration-300"
+             x-transition:enter-start="opacity-0"
+             x-transition:enter-end="opacity-100"
+             x-transition:leave="transition ease-in duration-200"
+             x-transition:leave-start="opacity-100"
+             x-transition:leave-end="opacity-0"
+             x-cloak>
+            <div class="bg-white rounded-3xl p-8 max-w-sm w-full shadow-2xl transform transition-all scale-100"
+                 @click.away="showResetModal = false">
+                
+                <div class="w-12 h-12 rounded-full bg-red-100 text-red-500 flex items-center justify-center mb-4 mx-auto">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                </div>
+
+                <h3 class="text-xl font-bold text-slate-800 mb-2 text-center">আপনি কি নিশ্চিত?</h3>
+                <p class="text-slate-500 text-center mb-6 text-sm">আপনার সকল আমলের অগ্রগতি মুছে ফেলা হবে। এই কাজটি আর ফিরিয়ে আনা যাবে না।</p>
+                
+                <div class="flex gap-3">
+                    <button @click="showResetModal = false" class="flex-1 px-4 py-3 rounded-xl text-slate-600 bg-slate-100 hover:bg-slate-200 font-bold transition-colors">বাতিল</button>
+                    <button @click="confirmReset()" class="flex-1 px-4 py-3 rounded-xl bg-red-500 text-white hover:bg-red-600 font-bold transition-colors shadow-lg shadow-red-200">মুছে ফেলুন</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Funny "Broke" Modal -->
+        <div x-show="showDonateModal" 
+             class="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-900/80 backdrop-blur-md"
+             x-transition:enter="transition ease-out duration-300"
+             x-transition:enter-start="opacity-0"
+             x-transition:enter-end="opacity-100"
+             x-transition:leave="transition ease-in duration-200"
+             x-transition:leave-start="opacity-100"
+             x-transition:leave-end="opacity-0"
+             x-cloak>
+            <div class="bg-white rounded-[2rem] p-8 max-w-sm w-full shadow-2xl transform transition-all scale-100 relative overflow-hidden"
+                 @click.away="showDonateModal = false">
+                
+                <!-- Confetti Background (Static SVG) -->
+                <div class="absolute inset-0 opacity-10 pointer-events-none">
+                     <svg class="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+                        <circle cx="10" cy="10" r="2" fill="#FBBF24" /> <circle cx="20" cy="80" r="3" fill="#34D399" /> <circle cx="80" cy="30" r="2" fill="#60A5FA" /> <circle cx="90" cy="90" r="4" fill="#F87171" />
+                     </svg>
+                </div>
+
+                <div class="w-20 h-20 rounded-full bg-yellow-100 text-yellow-600 flex items-center justify-center mb-4 mx-auto text-4xl shadow-inner border-4 border-yellow-50 animate-bounce">
+                    💸
+                </div>
+
+                <h3 class="text-2xl font-black text-slate-800 mb-2 text-center">Server is Hungry!</h3>
+                <p class="text-slate-600 text-center mb-6 text-sm font-medium">
+                    "টাকা পাঠাতে চেয়েছেন, তাতেই আমি খুশি! আপাতত <b>শুধু দোয়া</b> পাঠান। তবে যদি বিরিয়ানি খাওয়াতে চান, তবে না করব না!" 🍛
+                </p>
+
+                <div class="bg-slate-100 p-4 rounded-xl text-center mb-6 border border-slate-200">
+                    <p class="text-xs text-slate-400 uppercase font-bold tracking-wider mb-1">Account Balance</p>
+                    <p class="text-3xl font-mono font-bold text-red-500">$0.00</p>
+                    <p class="text-[10px] text-slate-400 mt-1">(Really Broke)</p>
+                </div>
+                
+                <button @click="showDonateModal = false" class="w-full px-6 py-3 rounded-xl bg-emerald-600 text-white hover:bg-emerald-700 font-bold transition-all shadow-lg hover:shadow-emerald-200 active:scale-95">
+                    ঠিক আছে, দোয়া করলাম 🤲
+                </button>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- App Logic -->
+    <script>
+        function ramadanApp() {
+            return {
+                selectedDistrict: localStorage.getItem('district') || 'Dhaka',
+                activeTab: 'calendar',
+                ashraFilter: 'all',
+                search: '',
+                timeDigits: '--:--:--',
+                timeAmpm: '',
+                currentDateString: '',
+                countdownText: '',
+                nextEventName: '',
+                nowDate: new Date(),
+                completedDeeds: JSON.parse(localStorage.getItem('completedDeeds')) || [],
+                tasbeehCount: 0,
+                showResetModal: false,
+                showDonateModal: false, // Added for the funny modal
+
+                // Validated Data for Ramadan 2026 (Starts Feb 19)
+                ramadanData: [
+                    { day: 1, date: '19 Feb', dayName: 'Thursday', sehri: '05:12 AM', fajr: '05:15 AM', iftar: '05:58 PM', phase: 'Rehmat' },
+                    { day: 2, date: '20 Feb', dayName: 'Friday', sehri: '05:11 AM', fajr: '05:14 AM', iftar: '05:58 PM', phase: 'Rehmat' },
+                    { day: 3, date: '21 Feb', dayName: 'Saturday', sehri: '05:11 AM', fajr: '05:14 AM', iftar: '05:59 PM', phase: 'Rehmat' },
+                    { day: 4, date: '22 Feb', dayName: 'Sunday', sehri: '05:10 AM', fajr: '05:13 AM', iftar: '05:59 PM', phase: 'Rehmat' },
+                    { day: 5, date: '23 Feb', dayName: 'Monday', sehri: '05:09 AM', fajr: '05:12 AM', iftar: '06:00 PM', phase: 'Rehmat' },
+                    { day: 6, date: '24 Feb', dayName: 'Tuesday', sehri: '05:08 AM', fajr: '05:11 AM', iftar: '06:00 PM', phase: 'Rehmat' },
+                    { day: 7, date: '25 Feb', dayName: 'Wednesday', sehri: '05:08 AM', fajr: '05:11 AM', iftar: '06:01 PM', phase: 'Rehmat' },
+                    { day: 8, date: '26 Feb', dayName: 'Thursday', sehri: '05:07 AM', fajr: '05:10 AM', iftar: '06:01 PM', phase: 'Rehmat' },
+                    { day: 9, date: '27 Feb', dayName: 'Friday', sehri: '05:06 AM', fajr: '05:09 AM', iftar: '06:02 PM', phase: 'Rehmat' },
+                    { day: 10, date: '28 Feb', dayName: 'Saturday', sehri: '05:05 AM', fajr: '05:08 AM', iftar: '06:02 PM', phase: 'Rehmat' },
+                    { day: 11, date: '01 Mar', dayName: 'Sunday', sehri: '05:05 AM', fajr: '05:08 AM', iftar: '06:03 PM', phase: 'Magfirat' },
+                    { day: 12, date: '02 Mar', dayName: 'Monday', sehri: '05:04 AM', fajr: '05:07 AM', iftar: '06:03 PM', phase: 'Magfirat' },
+                    { day: 13, date: '03 Mar', dayName: 'Tuesday', sehri: '05:03 AM', fajr: '05:06 AM', iftar: '06:04 PM', phase: 'Magfirat' },
+                    { day: 14, date: '04 Mar', dayName: 'Wednesday', sehri: '05:02 AM', fajr: '05:05 AM', iftar: '06:04 PM', phase: 'Magfirat' },
+                    { day: 15, date: '05 Mar', dayName: 'Thursday', sehri: '05:01 AM', fajr: '05:04 AM', iftar: '06:05 PM', phase: 'Magfirat' },
+                    { day: 16, date: '06 Mar', dayName: 'Friday', sehri: '05:00 AM', fajr: '05:03 AM', iftar: '06:05 PM', phase: 'Magfirat' },
+                    { day: 17, date: '07 Mar', dayName: 'Saturday', sehri: '04:59 AM', fajr: '05:02 AM', iftar: '06:06 PM', phase: 'Magfirat' },
+                    { day: 18, date: '08 Mar', dayName: 'Sunday', sehri: '04:58 AM', fajr: '05:01 AM', iftar: '06:06 PM', phase: 'Magfirat' },
+                    { day: 19, date: '09 Mar', dayName: 'Monday', sehri: '04:57 AM', fajr: '05:00 AM', iftar: '06:07 PM', phase: 'Magfirat' },
+                    { day: 20, date: '10 Mar', dayName: 'Tuesday', sehri: '04:57 AM', fajr: '04:59 AM', iftar: '06:07 PM', phase: 'Magfirat' },
+                    { day: 21, date: '11 Mar', dayName: 'Wednesday', sehri: '04:56 AM', fajr: '04:58 AM', iftar: '06:07 PM', phase: 'Nazat' },
+                    { day: 22, date: '12 Mar', dayName: 'Thursday', sehri: '04:55 AM', fajr: '04:57 AM', iftar: '06:08 PM', phase: 'Nazat' },
+                    { day: 23, date: '13 Mar', dayName: 'Friday', sehri: '04:54 AM', fajr: '04:57 AM', iftar: '06:08 PM', phase: 'Nazat' },
+                    { day: 24, date: '14 Mar', dayName: 'Saturday', sehri: '04:53 AM', fajr: '04:56 AM', iftar: '06:09 PM', phase: 'Nazat' },
+                    { day: 25, date: '15 Mar', dayName: 'Sunday', sehri: '04:52 AM', fajr: '04:55 AM', iftar: '06:09 PM', phase: 'Nazat' },
+                    { day: 26, date: '16 Mar', dayName: 'Monday', sehri: '04:51 AM', fajr: '04:54 AM', iftar: '06:10 PM', phase: 'Nazat' },
+                    { day: 27, date: '17 Mar', dayName: 'Tuesday', sehri: '04:50 AM', fajr: '04:53 AM', iftar: '06:10 PM', phase: 'Nazat' },
+                    { day: 28, date: '18 Mar', dayName: 'Wednesday', sehri: '04:49 AM', fajr: '04:52 AM', iftar: '06:10 PM', phase: 'Nazat' },
+                    { day: 29, date: '19 Mar', dayName: 'Thursday', sehri: '04:48 AM', fajr: '04:50 AM', iftar: '06:11 PM', phase: 'Nazat' },
+                    { day: 30, date: '20 Mar', dayName: 'Friday', sehri: '04:47 AM', fajr: '04:49 AM', iftar: '06:11 PM', phase: 'Nazat' }
+                ],
+
+                districts: [
+                    { name: 'Dhaka', offset: 0 },
+                    { name: 'Gazipur', offset: 0 },
+                    { name: 'Narayanganj', offset: -1 },
+                    { name: 'Chattogram', offset: -5 },
+                    { name: 'Sylhet', offset: -6 },
+                    { name: 'Khulna', offset: 5 },
+                    { name: 'Rajshahi', offset: 7 },
+                    { name: 'Barishal', offset: 1 },
+                    { name: 'Rangpur', offset: 5 },
+                    { name: 'Mymensingh', offset: 1 },
+                    { name: 'Cumilla', offset: -4 },
+                    { name: 'Feni', offset: -3 },
+                    { name: 'Brahmanbaria', offset: -3 },
+                    { name: 'Noakhali', offset: -2 },
+                    { name: 'Chandpur', offset: -1 },
+                    { name: 'Cox\'s Bazar', offset: -4 },
+                    { name: 'Bogura', offset: 5 },
+                    { name: 'Pabna', offset: 6 },
+                    { name: 'Sirajganj', offset: 4 },
+                    { name: 'Tangail', offset: 2 },
+                    { name: 'Jessore', offset: 7 },
+                    { name: 'Satkhira', offset: 6 },
+                    { name: 'Kushtia', offset: 7 },
+                    { name: 'Faridpur', offset: 3 }
+                ].sort((a,b) => a.name.localeCompare(b.name)),
+
+                dailyDeeds: [
+                    { task: "আজকের দিনে অন্তত ১০ বার সুরা ইখলাস পাঠ করুন।", ref: "কুরআন তিলাওয়াত", hadith: "রাসূল (সা.) বলেছেন, 'সূরা ইখলাস কুরআনের এক-তৃতীয়াংশের সমান।' (বুখারী)" },
+                    { task: "একজন রোজাদারকে ইফতার করানোর চেষ্টা করুন।", ref: "দান-সদকা", hadith: "রাসূল (সা.) বলেছেন, 'যে ব্যক্তি কোনো রোজাদারকে ইফতার করাবে, সে তার সমান সওয়াব পাবে।' (তিরমিজি)" },
+                    { task: "তাহাজ্জুদ নামাজ আদায় করুন।", ref: "নফল ইবাদত", hadith: "রাসূল (সা.) বলেছেন, 'ফরজ নামাজের পর সর্বোত্তম নামাজ হলো রাতের নামাজ (তাহাজ্জুদ)।' (মুসলিম)" },
+                    { task: "বাবা-মায়ের খোঁজ নিন ও তাদের খেদমত করুন।", ref: "পারিবারিক", hadith: "রাসূল (সা.) বলেছেন, 'পিতা-মাতার সন্তুষ্টিতেই আল্লাহর সন্তুষ্টি।' (তিরমিজি)" },
+                    { task: "অহেতুক কথা বলা থেকে বিরত থাকুন।", ref: "আত্মশুদ্ধি", hadith: "রাসূল (সা.) বলেছেন, 'যে ব্যক্তি আল্লাহ ও শেষ দিবসের প্রতি বিশ্বাস রাখে, সে যেন ভালো কথা বলে অথবা চুপ থাকে।' (বুখারী)" },
+                    { task: "১০০ বার 'সুবহানাল্লাহ' পাঠ করুন।", ref: "জিকির", hadith: "রাসূল (সা.) বলেছেন, 'দুটি বাক্য জিহ্বায় হালকা কিন্তু পাল্লায় ভারী: সুবহানাল্লাহি ওয়া বিহামদিহি, সুবহানাল্লাহিল আজিম।' (বুখারী)" },
+                    { task: "প্রতিবেশীর হক আদায় করুন।", ref: "সামাজিক", hadith: "রাসূল (সা.) বলেছেন, 'সে মুমিন নয়, যে পেট ভরে খায় অথচ তার প্রতিবেশী ক্ষুধার্ত থাকে।' (বায়হাকী)" },
+                    { task: "আসরের পর সুরা ওয়াকিয়া পাঠ করুন।", ref: "কুরআন তিলাওয়াত", hadith: "রাসূল (সা.) বলেছেন, 'যে ব্যক্তি প্রতি রাতে সূরা ওয়াকিয়া পাঠ করবে, তাকে কখনো অভাব স্পর্শ করবে না।' (বায়হাকী)" },
+                    { task: "অসহায় কাউকে কিছু দান করুন।", ref: "দান-সদকা", hadith: "রাসূল (সা.) বলেছেন, 'সদকা আল্লাহর ক্রোধকে নিভিয়ে দেয় এবং খারাপ মৃত্যু থেকে রক্ষা করে।' (তিরমিজি)" },
+                    { task: "ঘুমানোর আগে সুরা মুলক পাঠ করুন।", ref: "কুরআন তিলাওয়াত", hadith: "রাসূল (সা.) বলেছেন, 'কুরআনে এমন একটি সূরা আছে যা ৩০ আয়াত বিশিষ্ট, এটি পাঠকারীর জন্য সুপারিশ করবে যতক্ষণ না তাকে ক্ষমা করা হয়।' (তিরমিজি)" },
+                    { task: "আজকের দিনে অন্তত ১ পারা কুরআন পড়ুন।", ref: "কুরআন তিলাওয়াত", hadith: "রাসূল (সা.) বলেছেন, 'তোমাদের মধ্যে সর্বোত্তম সেই ব্যক্তি, যে কুরআন শেখে এবং অন্যকে শেখায়।' (বুখারী)" },
+                    { task: "এতিম বা মিসকিনদের খোঁজ নিন।", ref: "সামাজিক", hadith: "রাসূল (সা.) বলেছেন, 'আমি এবং এতিমের রক্ষণাবেক্ষণকারী জান্নাতে এই দুই আঙুলের মতো পাশাপাশি থাকব।' (বুখারী)" },
+                    { task: "ইফতারের আগে বেশি বেশি ইস্তিগফার করুন।", ref: "দুআ", hadith: "রাসূল (সা.) বলেছেন, 'তিন ব্যক্তির দোয়া ফিরিয়ে দেওয়া হয় না: ন্যায়পরায়ণ শাসক, রোজাদার ইফতারের আগ পর্যন্ত এবং অত্যাচারিত ব্যক্তির দোয়া।' (তিরমিজি)" },
+                    { task: "আত্মীয়-স্বজনের সাথে সম্পর্ক উন্নয়ন করুন।", ref: "পারিবারিক", hadith: "রাসূল (সা.) বলেছেন, 'যে ব্যক্তি তার রিযিক বৃদ্ধি ও হায়াত দীর্ঘ করতে চায়, সে যেন আত্মীয়তার সম্পর্ক বজায় রাখে।' (বুখারী)" },
+                    { task: "আজকের তারাবি নামাজ জামাতে আদায় করুন।", ref: "নামাজ", hadith: "রাসূল (সা.) বলেছেন, 'যে ব্যক্তি ঈমানের সাথে ও সওয়াবের আশায় রমজানের রাতে নামাজ (তারাবি) আদায় করে, তার পূর্বের গুনাহ মাফ করে দেওয়া হয়।' (বুখারী)" },
+                    { task: "১০০ বার 'লা ইলাহা ইল্লাল্লাহ' পাঠ করুন।", ref: "জিকির", hadith: "রাসূল (সা.) বলেছেন, 'সর্বোত্তম জিকির হলো লা ইলাহা ইল্লাল্লাহ।' (তিরমিজি)" },
+                    { task: "রাস্তা থেকে কষ্টদায়ক বস্তু সরিয়ে দিন।", ref: "সামাজিক", hadith: "রাসূল (সা.) বলেছেন, 'ঈমানের সত্তরটিরও বেশি শাখা রয়েছে, এর মধ্যে সর্বনিম্ন হলো রাস্তা থেকে কষ্টদায়ক বস্তু সরানো।' (মুসলিম)" },
+                    { task: "কারো গীবত শোনা থেকে বিরত থাকুন।", ref: "আত্মশুদ্ধি", hadith: "রাসূল (সা.) বলেছেন, 'গীবত ব্যভিচারের চেয়েও মারাত্মক।' (বায়হাকী)" },
+                    { task: "আল্লাহর কাছে নিজের গুনাহ মাফের জন্য কাঁদুন।", ref: "তাওবা", hadith: "রাসূল (সা.) বলেছেন, 'গুনাহ থেকে তওবাকারী ব্যক্তি এমন, যেন তার কোনো গুনাহই নেই।' (ইবনে মাজাহ)" },
+                    { task: "মসজিদে কিছু দান করুন।", ref: "দান-সদকা", hadith: "রাসূল (সা.) বলেছেন, 'যে ব্যক্তি আল্লাহর জন্য মসজিদ নির্মাণ করে, আল্লাহ তার জন্য জান্নাতে একটি ঘর নির্মাণ করেন।' (বুখারী)" },
+                    { task: "আজকের দিনে কাউকে কটুকথা বলা থেকে বিরত থাকুন।", ref: "আত্মশুদ্ধি", hadith: "রাসূল (সা.) বলেছেন, 'মুমিন কখনো দোষারোপকারী, অভিশাপকারী, অশ্লীল ও গালিগালাজকারী হয় না।' (তিরমিজি)" },
+                    { task: "শবে কদরের তালাশে ইবাদত করুন।", ref: "ইবাদত", hadith: "রাসূল (সা.) বলেছেন, 'তোমরা রমজানের শেষ দশকে শবে কদর তালাশ করো।' (বুখারী)" },
+                    { task: "বেশি বেশি দুরুদ শরীফ পাঠ করুন।", ref: "দুরুদ", hadith: "রাসূল (সা.) বলেছেন, 'যে ব্যক্তি আমার ওপর একবার দুরুদ পাঠ করে, আল্লাহ তার ওপর দশটি রহমত বর্ষণ করেন।' (মুসলিম)" },
+                    { task: "কুরআনের অর্থ ও ব্যাখ্যা পড়ার চেষ্টা করুন।", ref: "ইলম চর্চা", hadith: "রাসূল (সা.) বলেছেন, 'জ্ঞান অন্বেষণ করা প্রত্যেক মুসলিমের ওপর ফরজ।' (ইবনে মাজাহ)" },
+                    { task: "অসুস্থ কাউকে দেখতে যান।", ref: "সামাজিক", hadith: "রাসূল (সা.) বলেছেন, 'যখন কোনো মুসলিম তার অসুস্থ ভাইকে দেখতে যায়, সে ফিরে আসা পর্যন্ত জান্নাতের বাগানে বিচরণ করতে থাকে।' (মুসলিম)" },
+                    { task: "নিজের রাগ নিয়ন্ত্রণ করুন।", ref: "আত্মশুদ্ধি", hadith: "রাসূল (সা.) বলেছেন, 'সে ব্যক্তি শক্তিশালী নয় যে কুস্তিতে জয়ী হয়, বরং সেই শক্তিশালী যে রাগের সময় নিজেকে নিয়ন্ত্রণ করতে পারে।' (বুখারী)" },
+                    { task: "সাদকাতুল ফিতর আদায়ের প্রস্তুতি নিন।", ref: "দান-সদকা", hadith: "রাসূল (সা.) রোজাদারের অনর্থক কথা ও কাজ থেকে পবিত্র করার জন্য এবং মিসকিনদের খাবারের ব্যবস্থা হিসেবে ফিতরা ফরজ করেছেন। (আবু দাউদ)" },
+                    { task: "আল্লাহর নেয়ামতের শুকরিয়া আদায় করুন।", ref: "শুকরিয়া", hadith: "আল্লাহ বলেন, 'যদি তোমরা শুকরিয়া আদায় করো, তবে আমি অবশ্যই তোমাদের নেয়ামত বাড়িয়ে দেব।' (সূরা ইব্রাহিম: ৭)" },
+                    { task: "আগামী ঈদের জন্য কাউকে উপহার দিন।", ref: "সামাজিক", hadith: "রাসূল (সা.) বলেছেন, 'তোমরা একে অপরকে উপহার দাও, এতে তোমাদের মধ্যে ভালোবাসা সৃষ্টি হবে।' (বুখারী)" },
+                    { task: "রমজানের শিক্ষা সারা বছর ধরে রাখার নিয়ত করুন।", ref: "নিয়ত", hadith: "রাসূল (সা.) বলেছেন, 'আমল তো নিয়তের ওপর নির্ভরশীল।' (বুখারী)" }
+                ],
+
+                init() {
+                    this.updateTime();
+                    setInterval(() => this.updateTime(), 1000);
+                },
+
+                saveDistrict() {
+                    localStorage.setItem('district', this.selectedDistrict);
+                    this.updateTime(); // Force update immediately
+                },
+                
+                toggleDeed(index) {
+                    if (this.completedDeeds.includes(index)) {
+                        this.completedDeeds = this.completedDeeds.filter(i => i !== index);
+                    } else {
+                        this.completedDeeds.push(index);
+                    }
+                    localStorage.setItem('completedDeeds', JSON.stringify(this.completedDeeds));
+                },
+                
+                resetDeeds() {
+                    this.showResetModal = true;
+                },
+
+                confirmReset() {
+                    this.completedDeeds = [];
+                    localStorage.setItem('completedDeeds', JSON.stringify([]));
+                    this.showResetModal = false;
+                },
+                
+                incrementTasbeeh() {
+                    this.tasbeehCount++;
+                    if (navigator.vibrate) navigator.vibrate(50); // Haptic feedback
+                },
+                
+                resetTasbeeh() {
+                     this.tasbeehCount = 0;
+                },
+                
+                isDeedCompleted(index) {
+                    return this.completedDeeds.includes(index);
+                },
+
+                get progressPercentage() {
+                    if (this.dailyDeeds.length === 0) return 0;
+                    return Math.round((this.completedDeeds.length / this.dailyDeeds.length) * 100);
+                },
+
+                isToday(dateStr) {
+                    const months = { 'Jan': 0, 'Feb': 1, 'Mar': 2, 'Apr': 3, 'May': 4, 'Jun': 5, 'Jul': 6, 'Aug': 7, 'Sep': 8, 'Oct': 9, 'Nov': 10, 'Dec': 11 };
+                    const parts = dateStr.split(' ');
+                    const day = parseInt(parts[0]);
+                    const month = months[parts[1]];
+                    const now = new Date();
+                    return now.getDate() === day && now.getMonth() === month;
+                },
+
+                updateTime() {
+                    this.nowDate = new Date();
+                    let hours = this.nowDate.getHours();
+                    let minutes = this.nowDate.getMinutes();
+                    let seconds = this.nowDate.getSeconds();
+                    let ampm = hours >= 12 ? 'PM' : 'AM';
+                    hours = hours % 12;
+                    hours = hours ? hours : 12;
+                    
+                    // Separate digits (converted to Bangla) and AM/PM (kept in English)
+                    const timeString = hours + ':' + (minutes < 10 ? '0' + minutes : minutes) + ':' + (seconds < 10 ? '0' + seconds : seconds);
+                    this.timeDigits = this.toBn(timeString);
+                    this.timeAmpm = ampm;
+
+                    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+                    let dateStr = this.nowDate.toLocaleDateString('bn-BD', options);
+                    this.currentDateString = dateStr;
+
+                    this.calculateCountdown();
+                },
+
+                calculateCountdown() {
+                    const todayEntry = this.todayData;
+                    if (!todayEntry) {
+                        this.countdownText = "রমজান শুরু হয়নি";
+                        this.nextEventName = "";
+                        return;
+                    }
+
+                    // Parse times
+                    const now = new Date();
+                    const sehriTimeStr = this.adjustTime(todayEntry.sehri);
+                    const iftarTimeStr = this.adjustTime(todayEntry.iftar);
+                    
+                    const sehriDate = this.parseTime(sehriTimeStr);
+                    const iftarDate = this.parseTime(iftarTimeStr);
+
+                    let diff = 0;
+
+                    if (now < sehriDate) {
+                        this.nextEventName = "সেহরি শেষ হতে";
+                        diff = sehriDate - now;
+                    } else if (now < iftarDate) {
+                        this.nextEventName = "ইফতার শুরু হতে";
+                        diff = iftarDate - now;
+                    } else {
+                        // After iftar, look to next day sehri (simplified logic: just show "Iftar Done")
+                         this.nextEventName = "";
+                         this.countdownText = "আজকের ইফতার সম্পন্ন";
+                         return;
+                    }
+
+                    if (diff > 0) {
+                        const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                        const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                        const s = Math.floor((diff % (1000 * 60)) / 1000);
+                        this.countdownText = this.toBn(`${h} ঘণ্টা ${m} মিনিট ${s} সেকেন্ড`);
+                    }
+                },
+
+                parseTime(timeStr) {
+                    const d = new Date();
+                    const [time, modifier] = timeStr.split(' ');
+                    let [hours, minutes] = time.split(':');
+                    if (hours === '12') hours = '00';
+                    if (modifier === 'PM') hours = parseInt(hours, 10) + 12;
+                    d.setHours(hours, minutes, 0, 0);
+                    return d;
+                },
+
+                get todayData() {
+                    const months = { 'Jan': 0, 'Feb': 1, 'Mar': 2, 'Apr': 3, 'May': 4, 'Jun': 5, 'Jul': 6, 'Aug': 7, 'Sep': 8, 'Oct': 9, 'Nov': 10, 'Dec': 11 };
+                    const now = new Date();
+                    return this.ramadanData.find(d => {
+                        const parts = d.date.split(' ');
+                        const day = parseInt(parts[0]);
+                        const month = months[parts[1]];
+                        return now.getDate() === day && now.getMonth() === month;
+                    });
+                },
+
+                get filteredData() {
+                    let data = this.ramadanData;
+                    
+                    if (this.ashraFilter === 1) data = data.filter(d => d.day <= 10);
+                    if (this.ashraFilter === 2) data = data.filter(d => d.day > 10 && d.day <= 20);
+                    if (this.ashraFilter === 3) data = data.filter(d => d.day > 20);
+
+                    if (this.search) {
+                        const s = this.search.toLowerCase();
+                        data = data.filter(d => 
+                            d.day.toString().includes(s) || 
+                            d.dayName.toLowerCase().includes(s) ||
+                            this.toBn(d.day).includes(s) ||
+                            this.bnDay(d.dayName).includes(s)
+                        );
+                    }
+                    return data;
+                },
+
+                // Improved time adjustment logic to correctly handle AM/PM switching
+                adjustTime(timeStr) {
+                    const dist = this.districts.find(d => d.name === this.selectedDistrict);
+                    const offset = dist ? dist.offset : 0;
+                    if (offset === 0) return timeStr;
+
+                    const [time, modifier] = timeStr.split(' ');
+                    let [hours, minutes] = time.split(':').map(Number);
+                    
+                    // Convert to 24h format for calculation
+                    if (modifier === 'PM' && hours !== 12) hours += 12;
+                    if (modifier === 'AM' && hours === 12) hours = 0;
+                    
+                    const date = new Date();
+                    date.setHours(hours, minutes + offset, 0, 0);
+                    
+                    // Format back to 12h
+                    let newHours = date.getHours();
+                    let newMinutes = date.getMinutes();
+                    const newModifier = newHours >= 12 ? 'PM' : 'AM';
+                    
+                    newHours = newHours % 12;
+                    newHours = newHours ? newHours : 12; // the hour '0' should be '12'
+                    
+                    const formattedMin = newMinutes < 10 ? '0' + newMinutes : newMinutes;
+                    const formattedHour = newHours < 10 ? '0' + newHours : newHours;
+                    
+                    return `${formattedHour}:${formattedMin} ${newModifier}`;
+                },
+
+                toBn(text) {
+                    if(!text) return '';
+                    const en = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday', 'Monday', 'Tuesday'];
+                    const bn = ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯', 'বুধবার', 'বৃহস্পতিবার', 'শুক্রবার', 'শনিবার', 'রবিবার', 'সোমবার', 'মঙ্গলবার'];
+                    
+                    let str = String(text);
+                    for (let i = 0; i < en.length; i++) {
+                        str = str.replace(new RegExp(en[i], 'g'), bn[i]);
+                    }
+                    return str;
+                },
+
+                bnDay(day) {
+                    const days = {
+                        'Saturday': 'শনিবার', 'Sunday': 'রবিবার', 'Monday': 'সোমবার',
+                        'Tuesday': 'মঙ্গলবার', 'Wednesday': 'বুধবার', 'Thursday': 'বৃহস্পতিবার', 'Friday': 'শুক্রবার'
+                    };
+                    return days[day] || day;
+                },
+                
+                bnPhase(phase) {
+                    const phases = { 'Rehmat': 'রহমত', 'Magfirat': 'মাগফিরাত', 'Nazat': 'নাজাত' };
+                    return phases[phase] || phase;
+                }
+            }
+        }
+    </script>
+</body>
+</html>
