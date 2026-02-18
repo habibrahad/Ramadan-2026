@@ -117,7 +117,7 @@
                     
                     <!-- District Selector -->
                     <div class="bg-emerald-900/40 backdrop-blur-md p-2 pl-4 rounded-xl border border-emerald-500/30 inline-flex flex-col sm:flex-row items-center gap-3">
-                        <span class="text-emerald-200 text-sm font-medium">আপনার জেলা নির্বাচন করুন:</span>
+                        <span class="text-emerald-200 text-sm font-medium">আপনার এলাকা নির্বাচন করুন:</span>
                         <div class="relative">
                             <select x-model="selectedDistrict" @change="saveDistrict()" autocomplete="off"
                                     class="bg-emerald-100 text-emerald-900 font-bold rounded-lg pl-3 pr-8 py-2 outline-none focus:ring-2 focus:ring-emerald-400 appearance-none cursor-pointer hover:bg-white transition-colors w-48">
@@ -281,6 +281,9 @@
                     <div>
                         <h2 class="text-2xl md:text-3xl font-bold text-slate-800">সময়সূচী ২০২৬</h2>
                         <p class="text-slate-500 text-sm mt-1">সরাসরি তারিখ বা দিন দিয়ে খুঁজুন অথবা ১০ দিন করে দেখুন</p>
+                        <p x-show="selectedDistrict === 'Seattle (USA)'" class="text-blue-600 text-xs font-bold mt-2 animate-pulse">
+                            * Seattle সময়সূচী প্রদর্শিত হচ্ছে (DST সহ)
+                        </p>
                     </div>
                     
                     <!-- Ashra Filters -->
@@ -700,10 +703,10 @@
                 completedDeeds: JSON.parse(localStorage.getItem('completedDeeds')) || [],
                 tasbeehCount: 0,
                 showResetModal: false,
-                showDonateModal: false, // Added for the funny modal
+                showDonateModal: false,
 
-                // Validated Data for Ramadan 2026 (Starts Feb 19)
-                ramadanData: [
+                // BD Data (Starts Feb 19)
+                bdRamadanData: [
                     { day: 1, date: '19 Feb', dayName: 'Thursday', sehri: '05:12 AM', fajr: '05:15 AM', iftar: '05:58 PM', phase: 'Rehmat' },
                     { day: 2, date: '20 Feb', dayName: 'Friday', sehri: '05:11 AM', fajr: '05:14 AM', iftar: '05:58 PM', phase: 'Rehmat' },
                     { day: 3, date: '21 Feb', dayName: 'Saturday', sehri: '05:11 AM', fajr: '05:14 AM', iftar: '05:59 PM', phase: 'Rehmat' },
@@ -736,7 +739,43 @@
                     { day: 30, date: '20 Mar', dayName: 'Friday', sehri: '04:47 AM', fajr: '04:49 AM', iftar: '06:11 PM', phase: 'Nazat' }
                 ],
 
+                // Seattle Data (Starts Feb 18)
+                seattleRamadanData: [
+                    { day: 1, date: '18 Feb', dayName: 'Wednesday', sehri: '05:26 AM', fajr: '05:31 AM', iftar: '05:38 PM', phase: 'Rehmat' },
+                    { day: 2, date: '19 Feb', dayName: 'Thursday', sehri: '05:24 AM', fajr: '05:29 AM', iftar: '05:40 PM', phase: 'Rehmat' },
+                    { day: 3, date: '20 Feb', dayName: 'Friday', sehri: '05:23 AM', fajr: '05:28 AM', iftar: '05:41 PM', phase: 'Rehmat' },
+                    { day: 4, date: '21 Feb', dayName: 'Saturday', sehri: '05:21 AM', fajr: '05:26 AM', iftar: '05:43 PM', phase: 'Rehmat' },
+                    { day: 5, date: '22 Feb', dayName: 'Sunday', sehri: '05:19 AM', fajr: '05:24 AM', iftar: '05:44 PM', phase: 'Rehmat' },
+                    { day: 6, date: '23 Feb', dayName: 'Monday', sehri: '05:17 AM', fajr: '05:22 AM', iftar: '05:46 PM', phase: 'Rehmat' },
+                    { day: 7, date: '24 Feb', dayName: 'Tuesday', sehri: '05:16 AM', fajr: '05:21 AM', iftar: '05:47 PM', phase: 'Rehmat' },
+                    { day: 8, date: '25 Feb', dayName: 'Wednesday', sehri: '05:14 AM', fajr: '05:19 AM', iftar: '05:49 PM', phase: 'Rehmat' },
+                    { day: 9, date: '26 Feb', dayName: 'Thursday', sehri: '05:12 AM', fajr: '05:17 AM', iftar: '05:50 PM', phase: 'Rehmat' },
+                    { day: 10, date: '27 Feb', dayName: 'Friday', sehri: '05:10 AM', fajr: '05:15 AM', iftar: '05:52 PM', phase: 'Rehmat' },
+                    { day: 11, date: '28 Feb', dayName: 'Saturday', sehri: '05:08 AM', fajr: '05:13 AM', iftar: '05:53 PM', phase: 'Magfirat' },
+                    { day: 12, date: '01 Mar', dayName: 'Sunday', sehri: '05:06 AM', fajr: '05:11 AM', iftar: '05:55 PM', phase: 'Magfirat' },
+                    { day: 13, date: '02 Mar', dayName: 'Monday', sehri: '05:05 AM', fajr: '05:10 AM', iftar: '05:56 PM', phase: 'Magfirat' },
+                    { day: 14, date: '03 Mar', dayName: 'Tuesday', sehri: '05:03 AM', fajr: '05:08 AM', iftar: '05:58 PM', phase: 'Magfirat' },
+                    { day: 15, date: '04 Mar', dayName: 'Wednesday', sehri: '05:01 AM', fajr: '05:06 AM', iftar: '05:59 PM', phase: 'Magfirat' },
+                    { day: 16, date: '05 Mar', dayName: 'Thursday', sehri: '04:59 AM', fajr: '05:04 AM', iftar: '06:01 PM', phase: 'Magfirat' },
+                    { day: 17, date: '06 Mar', dayName: 'Friday', sehri: '04:57 AM', fajr: '05:02 AM', iftar: '06:02 PM', phase: 'Magfirat' },
+                    { day: 18, date: '07 Mar', dayName: 'Saturday', sehri: '04:55 AM', fajr: '05:00 AM', iftar: '06:04 PM', phase: 'Magfirat' },
+                    // DST Starts March 8 (+1 Hour)
+                    { day: 19, date: '08 Mar', dayName: 'Sunday', sehri: '05:55 AM', fajr: '06:00 AM', iftar: '07:04 PM', phase: 'Magfirat' },
+                    { day: 20, date: '09 Mar', dayName: 'Monday', sehri: '05:53 AM', fajr: '05:58 AM', iftar: '07:05 PM', phase: 'Magfirat' },
+                    { day: 21, date: '10 Mar', dayName: 'Tuesday', sehri: '05:51 AM', fajr: '05:56 AM', iftar: '07:07 PM', phase: 'Nazat' },
+                    { day: 22, date: '11 Mar', dayName: 'Wednesday', sehri: '05:49 AM', fajr: '05:54 AM', iftar: '07:08 PM', phase: 'Nazat' },
+                    { day: 23, date: '12 Mar', dayName: 'Thursday', sehri: '05:47 AM', fajr: '05:52 AM', iftar: '07:10 PM', phase: 'Nazat' },
+                    { day: 24, date: '13 Mar', dayName: 'Friday', sehri: '05:45 AM', fajr: '05:50 AM', iftar: '07:11 PM', phase: 'Nazat' },
+                    { day: 25, date: '14 Mar', dayName: 'Saturday', sehri: '05:43 AM', fajr: '05:48 AM', iftar: '07:12 PM', phase: 'Nazat' },
+                    { day: 26, date: '15 Mar', dayName: 'Sunday', sehri: '05:41 AM', fajr: '05:46 AM', iftar: '07:14 PM', phase: 'Nazat' },
+                    { day: 27, date: '16 Mar', dayName: 'Monday', sehri: '05:39 AM', fajr: '05:44 AM', iftar: '07:15 PM', phase: 'Nazat' },
+                    { day: 28, date: '17 Mar', dayName: 'Tuesday', sehri: '05:37 AM', fajr: '05:42 AM', iftar: '07:17 PM', phase: 'Nazat' },
+                    { day: 29, date: '18 Mar', dayName: 'Wednesday', sehri: '05:35 AM', fajr: '05:40 AM', iftar: '07:18 PM', phase: 'Nazat' },
+                    { day: 30, date: '19 Mar', dayName: 'Thursday', sehri: '05:33 AM', fajr: '05:38 AM', iftar: '07:19 PM', phase: 'Nazat' }
+                ],
+
                 districts: [
+                    { name: 'Seattle (USA)', offset: 'seattle' }, // New Seattle Option
                     { name: 'Dhaka', offset: 0 },
                     { name: 'Gazipur', offset: 0 },
                     { name: 'Narayanganj', offset: -1 },
@@ -761,7 +800,7 @@
                     { name: 'Satkhira', offset: 6 },
                     { name: 'Kushtia', offset: 7 },
                     { name: 'Faridpur', offset: 3 }
-                ].sort((a,b) => a.name.localeCompare(b.name)),
+                ],
 
                 dailyDeeds: [
                     { task: "আজকের দিনে অন্তত ১০ বার সুরা ইখলাস পাঠ করুন।", ref: "কুরআন তিলাওয়াত", hadith: "রাসূল (সা.) বলেছেন, 'সূরা ইখলাস কুরআনের এক-তৃতীয়াংশের সমান।' (বুখারী)" },
@@ -854,6 +893,12 @@
 
                 updateTime() {
                     this.nowDate = new Date();
+                    
+                    // For Seattle, we might want to show Seattle specific timezone eventually, 
+                    // but for now, we show local system time. 
+                    // To show Seattle time, we would need to offset UTC.
+                    // But keeping it simple to system time is usually expected for "My Time".
+                    
                     let hours = this.nowDate.getHours();
                     let minutes = this.nowDate.getMinutes();
                     let seconds = this.nowDate.getSeconds();
@@ -861,12 +906,12 @@
                     hours = hours % 12;
                     hours = hours ? hours : 12;
                     
-                    // Separate digits (converted to Bangla) and AM/PM (kept in English)
                     const timeString = hours + ':' + (minutes < 10 ? '0' + minutes : minutes) + ':' + (seconds < 10 ? '0' + seconds : seconds);
                     this.timeDigits = this.toBn(timeString);
                     this.timeAmpm = ampm;
 
                     const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+                    // If in Seattle mode, we might want English date, but keeping consistency with Bangla interface
                     let dateStr = this.nowDate.toLocaleDateString('bn-BD', options);
                     this.currentDateString = dateStr;
 
@@ -898,7 +943,6 @@
                         this.nextEventName = "ইফতার শুরু হতে";
                         diff = iftarDate - now;
                     } else {
-                        // After iftar, look to next day sehri (simplified logic: just show "Iftar Done")
                          this.nextEventName = "";
                          this.countdownText = "আজকের ইফতার সম্পন্ন";
                          return;
@@ -922,10 +966,16 @@
                     return d;
                 },
 
+                get activeData() {
+                    return this.selectedDistrict === 'Seattle (USA)' ? this.seattleRamadanData : this.bdRamadanData;
+                },
+
                 get todayData() {
                     const months = { 'Jan': 0, 'Feb': 1, 'Mar': 2, 'Apr': 3, 'May': 4, 'Jun': 5, 'Jul': 6, 'Aug': 7, 'Sep': 8, 'Oct': 9, 'Nov': 10, 'Dec': 11 };
                     const now = new Date();
-                    return this.ramadanData.find(d => {
+                    
+                    // Use activeData instead of hardcoded list
+                    return this.activeData.find(d => {
                         const parts = d.date.split(' ');
                         const day = parseInt(parts[0]);
                         const month = months[parts[1]];
@@ -934,7 +984,7 @@
                 },
 
                 get filteredData() {
-                    let data = this.ramadanData;
+                    let data = this.activeData;
                     
                     if (this.ashraFilter === 1) data = data.filter(d => d.day <= 10);
                     if (this.ashraFilter === 2) data = data.filter(d => d.day > 10 && d.day <= 20);
@@ -952,29 +1002,29 @@
                     return data;
                 },
 
-                // Improved time adjustment logic to correctly handle AM/PM switching
                 adjustTime(timeStr) {
                     const dist = this.districts.find(d => d.name === this.selectedDistrict);
-                    const offset = dist ? dist.offset : 0;
+                    // If district is Seattle (or any 'offset' that is not a number), return raw time
+                    if (!dist || typeof dist.offset !== 'number') return timeStr;
+
+                    const offset = dist.offset;
                     if (offset === 0) return timeStr;
 
                     const [time, modifier] = timeStr.split(' ');
                     let [hours, minutes] = time.split(':').map(Number);
                     
-                    // Convert to 24h format for calculation
                     if (modifier === 'PM' && hours !== 12) hours += 12;
                     if (modifier === 'AM' && hours === 12) hours = 0;
                     
                     const date = new Date();
                     date.setHours(hours, minutes + offset, 0, 0);
                     
-                    // Format back to 12h
                     let newHours = date.getHours();
                     let newMinutes = date.getMinutes();
                     const newModifier = newHours >= 12 ? 'PM' : 'AM';
                     
                     newHours = newHours % 12;
-                    newHours = newHours ? newHours : 12; // the hour '0' should be '12'
+                    newHours = newHours ? newHours : 12;
                     
                     const formattedMin = newMinutes < 10 ? '0' + newMinutes : newMinutes;
                     const formattedHour = newHours < 10 ? '0' + newHours : newHours;
