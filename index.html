@@ -281,8 +281,8 @@
                     <div>
                         <h2 class="text-2xl md:text-3xl font-bold text-slate-800">সময়সূচী ২০২৬</h2>
                         <p class="text-slate-500 text-sm mt-1">সরাসরি তারিখ বা দিন দিয়ে খুঁজুন অথবা ১০ দিন করে দেখুন</p>
-                        <p x-show="selectedDistrict === 'Seattle (USA)'" class="text-blue-600 text-xs font-bold mt-2 animate-pulse">
-                            * Seattle সময়সূচী প্রদর্শিত হচ্ছে (DST সহ)
+                        <p x-show="['Seattle (USA)', 'Washington DC (USA)'].includes(selectedDistrict)" class="text-blue-600 text-xs font-bold mt-2 animate-pulse">
+                            * USA সময়সূচী প্রদর্শিত হচ্ছে (DST সহ)
                         </p>
                     </div>
                     
@@ -773,9 +773,45 @@
                     { day: 29, date: '18 Mar', dayName: 'Wednesday', sehri: '05:35 AM', fajr: '05:40 AM', iftar: '07:18 PM', phase: 'Nazat' },
                     { day: 30, date: '19 Mar', dayName: 'Thursday', sehri: '05:33 AM', fajr: '05:38 AM', iftar: '07:19 PM', phase: 'Nazat' }
                 ],
+                
+                // Washington DC Data (Starts Feb 18, 2026)
+                dcRamadanData: [
+                    { day: 1, date: '18 Feb', dayName: 'Wednesday', sehri: '05:30 AM', fajr: '05:35 AM', iftar: '05:49 PM', phase: 'Rehmat' },
+                    { day: 2, date: '19 Feb', dayName: 'Thursday', sehri: '05:29 AM', fajr: '05:34 AM', iftar: '05:50 PM', phase: 'Rehmat' },
+                    { day: 3, date: '20 Feb', dayName: 'Friday', sehri: '05:28 AM', fajr: '05:33 AM', iftar: '05:51 PM', phase: 'Rehmat' },
+                    { day: 4, date: '21 Feb', dayName: 'Saturday', sehri: '05:26 AM', fajr: '05:31 AM', iftar: '05:52 PM', phase: 'Rehmat' },
+                    { day: 5, date: '22 Feb', dayName: 'Sunday', sehri: '05:25 AM', fajr: '05:30 AM', iftar: '05:53 PM', phase: 'Rehmat' },
+                    { day: 6, date: '23 Feb', dayName: 'Monday', sehri: '05:24 AM', fajr: '05:29 AM', iftar: '05:54 PM', phase: 'Rehmat' },
+                    { day: 7, date: '24 Feb', dayName: 'Tuesday', sehri: '05:22 AM', fajr: '05:27 AM', iftar: '05:55 PM', phase: 'Rehmat' },
+                    { day: 8, date: '25 Feb', dayName: 'Wednesday', sehri: '05:21 AM', fajr: '05:26 AM', iftar: '05:56 PM', phase: 'Rehmat' },
+                    { day: 9, date: '26 Feb', dayName: 'Thursday', sehri: '05:20 AM', fajr: '05:25 AM', iftar: '05:57 PM', phase: 'Rehmat' },
+                    { day: 10, date: '27 Feb', dayName: 'Friday', sehri: '05:18 AM', fajr: '05:23 AM', iftar: '05:58 PM', phase: 'Rehmat' },
+                    { day: 11, date: '28 Feb', dayName: 'Saturday', sehri: '05:17 AM', fajr: '05:22 AM', iftar: '05:59 PM', phase: 'Magfirat' },
+                    { day: 12, date: '01 Mar', dayName: 'Sunday', sehri: '05:15 AM', fajr: '05:20 AM', iftar: '06:00 PM', phase: 'Magfirat' },
+                    { day: 13, date: '02 Mar', dayName: 'Monday', sehri: '05:14 AM', fajr: '05:19 AM', iftar: '06:01 PM', phase: 'Magfirat' },
+                    { day: 14, date: '03 Mar', dayName: 'Tuesday', sehri: '05:12 AM', fajr: '05:17 AM', iftar: '06:02 PM', phase: 'Magfirat' },
+                    { day: 15, date: '04 Mar', dayName: 'Wednesday', sehri: '05:11 AM', fajr: '05:16 AM', iftar: '06:03 PM', phase: 'Magfirat' },
+                    { day: 16, date: '05 Mar', dayName: 'Thursday', sehri: '05:09 AM', fajr: '05:14 AM', iftar: '06:05 PM', phase: 'Magfirat' },
+                    { day: 17, date: '06 Mar', dayName: 'Friday', sehri: '05:07 AM', fajr: '05:12 AM', iftar: '06:06 PM', phase: 'Magfirat' },
+                    { day: 18, date: '07 Mar', dayName: 'Saturday', sehri: '05:06 AM', fajr: '05:11 AM', iftar: '06:07 PM', phase: 'Magfirat' },
+                    // DST Starts March 8 (+1 Hour)
+                    { day: 19, date: '08 Mar', dayName: 'Sunday', sehri: '06:04 AM', fajr: '06:09 AM', iftar: '07:08 PM', phase: 'Magfirat' },
+                    { day: 20, date: '09 Mar', dayName: 'Monday', sehri: '06:03 AM', fajr: '06:08 AM', iftar: '07:09 PM', phase: 'Magfirat' },
+                    { day: 21, date: '10 Mar', dayName: 'Tuesday', sehri: '06:01 AM', fajr: '06:06 AM', iftar: '07:10 PM', phase: 'Nazat' },
+                    { day: 22, date: '11 Mar', dayName: 'Wednesday', sehri: '05:59 AM', fajr: '06:04 AM', iftar: '07:11 PM', phase: 'Nazat' },
+                    { day: 23, date: '12 Mar', dayName: 'Thursday', sehri: '05:58 AM', fajr: '06:03 AM', iftar: '07:12 PM', phase: 'Nazat' },
+                    { day: 24, date: '13 Mar', dayName: 'Friday', sehri: '05:56 AM', fajr: '06:01 AM', iftar: '07:13 PM', phase: 'Nazat' },
+                    { day: 25, date: '14 Mar', dayName: 'Saturday', sehri: '05:54 AM', fajr: '05:59 AM', iftar: '07:14 PM', phase: 'Nazat' },
+                    { day: 26, date: '15 Mar', dayName: 'Sunday', sehri: '05:53 AM', fajr: '05:58 AM', iftar: '07:15 PM', phase: 'Nazat' },
+                    { day: 27, date: '16 Mar', dayName: 'Monday', sehri: '05:51 AM', fajr: '05:56 AM', iftar: '07:16 PM', phase: 'Nazat' },
+                    { day: 28, date: '17 Mar', dayName: 'Tuesday', sehri: '05:49 AM', fajr: '05:54 AM', iftar: '07:17 PM', phase: 'Nazat' },
+                    { day: 29, date: '18 Mar', dayName: 'Wednesday', sehri: '05:48 AM', fajr: '05:53 AM', iftar: '07:18 PM', phase: 'Nazat' },
+                    { day: 30, date: '19 Mar', dayName: 'Thursday', sehri: '05:46 AM', fajr: '05:51 AM', iftar: '07:19 PM', phase: 'Nazat' }
+                ],
 
                 districts: [
-                    { name: 'Seattle (USA)', offset: 'seattle' }, // New Seattle Option
+                    { name: 'Seattle (USA)', offset: 'seattle' },
+                    { name: 'Washington DC (USA)', offset: 'dc' },
                     { name: 'Dhaka', offset: 0 },
                     { name: 'Gazipur', offset: 0 },
                     { name: 'Narayanganj', offset: -1 },
@@ -967,7 +1003,9 @@
                 },
 
                 get activeData() {
-                    return this.selectedDistrict === 'Seattle (USA)' ? this.seattleRamadanData : this.bdRamadanData;
+                    if (this.selectedDistrict === 'Seattle (USA)') return this.seattleRamadanData;
+                    if (this.selectedDistrict === 'Washington DC (USA)') return this.dcRamadanData;
+                    return this.bdRamadanData;
                 },
 
                 get todayData() {
