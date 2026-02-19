@@ -172,28 +172,40 @@
     <main class="max-w-6xl mx-auto px-4 -mt-16 relative z-20 pb-20">
         
         <!-- MAIN TABS NAVIGATION -->
-        <div class="flex flex-wrap justify-center gap-4 mb-10 no-print relative z-30">
+        <div class="flex flex-wrap justify-center gap-3 md:gap-4 mb-10 no-print relative z-30">
             <button @click="activeTab = 'calendar'" 
-                    class="px-6 md:px-8 py-4 rounded-2xl font-bold text-base md:text-lg transition-all duration-300 transform hover:-translate-y-1 shadow-lg flex items-center gap-2"
-                    :class="activeTab === 'calendar' ? 'bg-emerald-600 text-white shadow-emerald-200 ring-4 ring-emerald-100' : 'bg-white text-slate-600 hover:bg-slate-50'">
+                    class="px-5 md:px-6 py-3 rounded-2xl font-bold text-sm md:text-base transition-all duration-300 transform hover:-translate-y-1 shadow-lg flex items-center gap-2"
+                    :class="activeTab === 'calendar' ? 'bg-emerald-600 text-white shadow-emerald-200 ring-2 ring-emerald-100' : 'bg-white text-slate-600 hover:bg-slate-50'">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-                রমজান ক্যালেন্ডার
+                ক্যালেন্ডার
+            </button>
+            <button @click="activeTab = 'quran'" 
+                    class="px-5 md:px-6 py-3 rounded-2xl font-bold text-sm md:text-base transition-all duration-300 transform hover:-translate-y-1 shadow-lg flex items-center gap-2"
+                    :class="activeTab === 'quran' ? 'bg-emerald-600 text-white shadow-emerald-200 ring-2 ring-emerald-100' : 'bg-white text-slate-600 hover:bg-slate-50'">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                কুরআন খতম
+            </button>
+            <button @click="activeTab = 'names'" 
+                    class="px-5 md:px-6 py-3 rounded-2xl font-bold text-sm md:text-base transition-all duration-300 transform hover:-translate-y-1 shadow-lg flex items-center gap-2"
+                    :class="activeTab === 'names' ? 'bg-emerald-600 text-white shadow-emerald-200 ring-2 ring-emerald-100' : 'bg-white text-slate-600 hover:bg-slate-50'">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path></svg>
+                আসমাউল হুসনা
             </button>
             <button @click="activeTab = 'dua_learning'" 
-                    class="px-6 md:px-8 py-4 rounded-2xl font-bold text-base md:text-lg transition-all duration-300 transform hover:-translate-y-1 shadow-lg flex items-center gap-2"
-                    :class="activeTab === 'dua_learning' ? 'bg-emerald-600 text-white shadow-emerald-200 ring-4 ring-emerald-100' : 'bg-white text-slate-600 hover:bg-slate-50'">
+                    class="px-5 md:px-6 py-3 rounded-2xl font-bold text-sm md:text-base transition-all duration-300 transform hover:-translate-y-1 shadow-lg flex items-center gap-2"
+                    :class="activeTab === 'dua_learning' ? 'bg-emerald-600 text-white shadow-emerald-200 ring-2 ring-emerald-100' : 'bg-white text-slate-600 hover:bg-slate-50'">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
-                দোয়া শিক্ষা
+                দোয়া
             </button>
             <button @click="activeTab = 'deeds'" 
-                    class="px-6 md:px-8 py-4 rounded-2xl font-bold text-base md:text-lg transition-all duration-300 transform hover:-translate-y-1 shadow-lg flex items-center gap-2"
-                    :class="activeTab === 'deeds' ? 'bg-emerald-600 text-white shadow-emerald-200 ring-4 ring-emerald-100' : 'bg-white text-slate-600 hover:bg-slate-50'">
+                    class="px-5 md:px-6 py-3 rounded-2xl font-bold text-sm md:text-base transition-all duration-300 transform hover:-translate-y-1 shadow-lg flex items-center gap-2"
+                    :class="activeTab === 'deeds' ? 'bg-emerald-600 text-white shadow-emerald-200 ring-2 ring-emerald-100' : 'bg-white text-slate-600 hover:bg-slate-50'">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path></svg>
                 আমল
             </button>
             <button @click="activeTab = 'tasbeeh'" 
-                    class="px-6 md:px-8 py-4 rounded-2xl font-bold text-base md:text-lg transition-all duration-300 transform hover:-translate-y-1 shadow-lg flex items-center gap-2"
-                    :class="activeTab === 'tasbeeh' ? 'bg-emerald-600 text-white shadow-emerald-200 ring-4 ring-emerald-100' : 'bg-white text-slate-600 hover:bg-slate-50'">
+                    class="px-5 md:px-6 py-3 rounded-2xl font-bold text-sm md:text-base transition-all duration-300 transform hover:-translate-y-1 shadow-lg flex items-center gap-2"
+                    :class="activeTab === 'tasbeeh' ? 'bg-emerald-600 text-white shadow-emerald-200 ring-2 ring-emerald-100' : 'bg-white text-slate-600 hover:bg-slate-50'">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z"></path></svg>
                 তসবিহ
             </button>
@@ -441,6 +453,133 @@
                             </div>
                         </div>
                     </template>
+                </div>
+            </div>
+        </div>
+
+        <!-- NEW TAB: QURAN TRACKER -->
+        <div x-show="activeTab === 'quran'" class="tab-content" x-cloak>
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center mb-10">
+                    <h2 class="text-3xl md:text-4xl font-bold text-slate-800 mb-2">কুরআন খতম ট্র্যাকার</h2>
+                    <p class="text-slate-500">রমজান মাসে কুরআন খতমের অগ্রগতি ট্র্যাক করুন</p>
+                </div>
+
+                <!-- QURAN PROGRESS -->
+                <div class="bg-white p-6 rounded-2xl shadow-lg border border-slate-100 mb-10 relative overflow-hidden">
+                    <div class="flex justify-between items-end mb-3 relative z-10">
+                        <div>
+                            <p class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">খতমের অগ্রগতি</p>
+                            <div class="flex items-baseline gap-1">
+                                <span class="text-4xl font-bold text-emerald-600" x-text="toBn(quranProgressPercentage)"></span>
+                                <span class="text-xl font-bold text-emerald-600">%</span>
+                                <span class="text-slate-500 font-medium ml-1">সম্পন্ন</span>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                             <div class="block">
+                                <span class="text-lg font-bold text-slate-700" x-text="toBn(quranTracker.filter(Boolean).length)"></span>
+                                <span class="text-slate-400 text-sm">/</span>
+                                <span class="text-sm font-bold text-slate-500" x-text="toBn(30)"></span>
+                                <span class="text-xs text-slate-400 block mt-0.5">পারা সম্পন্ন</span>
+                             </div>
+                        </div>
+                    </div>
+                    
+                    <div class="w-full bg-slate-100 rounded-full h-4 overflow-hidden relative z-10 shadow-inner">
+                        <div class="bg-gradient-to-r from-emerald-500 to-emerald-400 h-full rounded-full transition-all duration-700 ease-out flex items-center justify-end pr-1"
+                             :style="`width: ${quranProgressPercentage}%`">
+                             <div class="w-1.5 h-1.5 bg-white/30 rounded-full" x-show="quranProgressPercentage > 0"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- JUZ GRID -->
+                <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-4">
+                    <template x-for="(status, index) in quranTracker" :key="index">
+                        <button @click="toggleJuz(index)" 
+                                class="relative p-4 rounded-2xl border-2 transition-all duration-300 group hover:shadow-lg flex flex-col items-center justify-center gap-2"
+                                :class="status ? 'bg-emerald-50 border-emerald-500 shadow-md' : 'bg-white border-slate-100 hover:border-emerald-200'">
+                            
+                            <!-- Status Icon -->
+                            <div class="w-8 h-8 rounded-full flex items-center justify-center transition-colors"
+                                 :class="status ? 'bg-emerald-500 text-white' : 'bg-slate-100 text-slate-300 group-hover:bg-emerald-100 group-hover:text-emerald-400'">
+                                <svg x-show="status" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                                <span x-show="!status" class="text-xs font-bold" x-text="toBn(index + 1)"></span>
+                            </div>
+                            
+                            <span class="font-bold text-sm" 
+                                  :class="status ? 'text-emerald-800' : 'text-slate-500 group-hover:text-slate-700'">
+                                <span x-text="toBn(index + 1)"></span> তম পারা
+                            </span>
+                        </button>
+                    </template>
+                </div>
+            </div>
+        </div>
+
+        <!-- NEW TAB: ASMA-UL-HUSNA -->
+        <div x-show="activeTab === 'names'" class="tab-content" x-cloak>
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center mb-10">
+                    <h2 class="text-3xl md:text-4xl font-bold text-slate-800 mb-2">আসমাউল হুসনা</h2>
+                    <p class="text-slate-500">আল্লাহর সুন্দর নামসমূহ জানুন ও শিখুন</p>
+                </div>
+
+                <div class="bg-white rounded-[2.5rem] shadow-2xl border border-slate-200 overflow-hidden relative min-h-[500px] flex flex-col">
+                    <!-- Top Decorative Bar -->
+                    <div class="h-4 bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-600"></div>
+
+                    <!-- Content Area -->
+                    <div class="p-8 md:p-12 flex-grow flex flex-col justify-center items-center text-center relative z-10">
+                        
+                        <!-- Number Badge -->
+                        <div class="mb-8">
+                            <span class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-blue-50 text-blue-800 font-bold text-xl shadow-sm border border-blue-100">
+                                <span x-text="toBn(currentNameIndex + 1)"></span>
+                            </span>
+                        </div>
+
+                        <!-- Arabic Name -->
+                        <h3 class="font-arabic text-6xl md:text-8xl text-slate-800 leading-tight mb-8 drop-shadow-sm px-4"
+                            x-text="allahNames[currentNameIndex].arabic"></h3>
+
+                        <!-- Pronunciation -->
+                        <div class="mb-6 max-w-2xl bg-slate-50 p-4 rounded-xl border border-slate-100 w-full">
+                            <p class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">উচ্চারণ</p>
+                            <p class="text-2xl md:text-3xl text-blue-700 font-bold" x-text="allahNames[currentNameIndex].bangla"></p>
+                        </div>
+
+                        <!-- Meaning -->
+                        <div class="max-w-2xl w-full">
+                            <p class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">অর্থ</p>
+                            <p class="text-xl text-slate-600 font-medium leading-relaxed" x-text="allahNames[currentNameIndex].meaning"></p>
+                        </div>
+                    </div>
+
+                    <!-- Navigation Controls -->
+                    <div class="bg-slate-50 p-6 border-t border-slate-200 flex justify-between items-center">
+                        <button @click="prevName()" 
+                                class="flex items-center gap-2 px-6 py-3 rounded-xl font-bold transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                                :class="currentNameIndex === 0 ? 'bg-slate-200 text-slate-400' : 'bg-white text-slate-700 shadow-md hover:bg-blue-50 hover:text-blue-700'"
+                                :disabled="currentNameIndex === 0">
+                            <svg class="w-5 h-5 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                            <span class="hidden md:inline">পূর্ববর্তী</span>
+                        </button>
+
+                        <div class="text-slate-400 font-bold text-sm">
+                             <span x-text="toBn(currentNameIndex + 1)"></span> / <span x-text="toBn(allahNames.length)"></span>
+                        </div>
+
+                        <button @click="nextName()" 
+                                class="flex items-center gap-2 px-6 py-3 rounded-xl font-bold transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                                :class="currentNameIndex === allahNames.length - 1 ? 'bg-slate-200 text-slate-400' : 'bg-blue-600 text-white shadow-lg hover:bg-blue-700 hover:shadow-blue-200'"
+                                :disabled="currentNameIndex === allahNames.length - 1">
+                            <span class="hidden md:inline">পরবর্তী</span>
+                            <span class="md:hidden">পরবর্তী</span>
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -837,11 +976,49 @@
                 nowDate: new Date(),
                 completedDeeds: JSON.parse(localStorage.getItem('completedDeeds')) || [],
                 learnedDuas: JSON.parse(localStorage.getItem('learnedDuas')) || [],
+                quranTracker: JSON.parse(localStorage.getItem('quranTracker')) || Array(30).fill(false),
                 tasbeehCount: 0,
                 showResetModal: false,
                 resetTarget: 'deeds',
                 showDonateModal: false,
                 currentDuaIndex: 0,
+                currentNameIndex: 0,
+
+                allahNames: [
+                    { arabic: "الله", bangla: "আল্লাহ", meaning: "সৃষ্টিকর্তার মূল নাম" },
+                    { arabic: "الرَّحْمَنُ", bangla: "আর-রাহমান", meaning: "পরম দয়ালু" },
+                    { arabic: "الرَّحِيمُ", bangla: "আর-রাহীম", meaning: "অতি মেহেরবান" },
+                    { arabic: "الْمَلِكُ", bangla: "আল-মালিক", meaning: "প্রকৃত মালিক/রাজা" },
+                    { arabic: "الْقُدُّوسُ", bangla: "আল-কুদ্দুস", meaning: "মহা পবিত্র" },
+                    { arabic: "السَّلَامُ", bangla: "আস-সালাম", meaning: "শান্তিদাতা" },
+                    { arabic: "الْمُؤْمِنُ", bangla: "আল-মু’মিন", meaning: "নিরাপত্তাদাতা" },
+                    { arabic: "الْمُهَيْمِنُ", bangla: "আল-মুহাইমিন", meaning: "রক্ষনাবেক্ষণকারী" },
+                    { arabic: "الْعَزِيزُ", bangla: "আল-আযীয", meaning: "পরাক্রমশালী" },
+                    { arabic: "الْجَبَّارُ", bangla: "আল-জাব্বার", meaning: "মহাপ্রতাপশালী" },
+                    { arabic: "الْمُتَكَبِّرُ", bangla: "আল-মুতাকাব্বির", meaning: "সর্বশ্রেষ্ঠ" },
+                    { arabic: "الْخَالِقُ", bangla: "আল-খালিক্ব", meaning: "সৃষ্টিকর্তা" },
+                    { arabic: "الْبَارِئُ", bangla: "আল-বারী", meaning: "সঠিকভাবে সৃষ্টিকারী" },
+                    { arabic: "الْمُصَوِّرُ", bangla: "আল-মুসাউবির", meaning: "আকৃতিদানকারী" },
+                    { arabic: "الْغَفَّارُ", bangla: "আল-গাফফার", meaning: "পরম ক্ষমাশীল" },
+                    { arabic: "الْقَهَّارُ", bangla: "আল-কাহহার", meaning: "কঠোর হুকুমদাতা" },
+                    { arabic: "الْوَهَّابُ", bangla: "আল-ওয়াহহাব", meaning: "সবকিছু দানকারী" },
+                    { arabic: "الرَّزَّاقُ", bangla: "আর-রাজ্জাক", meaning: "রিজিকদাতা" },
+                    { arabic: "الْفَتَّاحُ", bangla: "আল-ফাত্তাহ", meaning: "বিজয়দানকারী" },
+                    { arabic: "الْعَلِيمُ", bangla: "আল-আলীম", meaning: "সর্বজ্ঞ" },
+                    { arabic: "الْقَابِضُ", bangla: "আল-ক্বাবিদ", meaning: "সংকীর্ণকারী" },
+                    { arabic: "الْبَاسِطُ", bangla: "আল-বাসিত", meaning: "প্রশস্তকারী" },
+                    { arabic: "الْخَافِضُ", bangla: "আল-খাফিদ", meaning: "অবনতকারী" },
+                    { arabic: "الرَّافِعُ", bangla: "আর-রাফি", meaning: "উন্নতকারী" },
+                    { arabic: "الْمُعِزُّ", bangla: "আল-মুয়িয", meaning: "সম্মানদাতা" },
+                    { arabic: "الْمُذِلُّ", bangla: "আল-মুযিল", meaning: "অপমানকারী" },
+                    { arabic: "السَّمِيعُ", bangla: "আস-সামি", meaning: "সর্বশ্রোতা" },
+                    { arabic: "الْبَصِيرُ", bangla: "আল-বাসির", meaning: "সর্বদ্রষ্টা" },
+                    { arabic: "الْحَكَمُ", bangla: "আল-হাকাম", meaning: "চূড়ান্ত বিচারক" },
+                    { arabic: "الْعَدْلُ", bangla: "আল-আদল", meaning: "ন্যায়বিচারক" },
+                    { arabic: "اللَّطِيفُ", bangla: "আল-লাতীফ", meaning: "সূক্ষ্মদর্শী" },
+                    { arabic: "الْخَبِيرُ", bangla: "আল-খাবীর", meaning: "মহা সংবাদরক্ষক" },
+                    { arabic: "الْحَلِيمُ", bangla: "আল-হালীম", meaning: "মহা ধৈর্যশীল" }
+                ],
 
                 // BD Data (Starts Feb 19)
                 bdRamadanData: [
@@ -1071,12 +1248,34 @@
                     localStorage.setItem('learnedDuas', JSON.stringify(this.learnedDuas));
                 },
                 
+                toggleJuz(index) {
+                    this.quranTracker[index] = !this.quranTracker[index];
+                    localStorage.setItem('quranTracker', JSON.stringify(this.quranTracker));
+                },
+                
                 isDuaLearned(index) {
                     return this.learnedDuas.includes(index);
                 },
 
                 get duaProgressPercentage() {
                     return Math.round((this.learnedDuas.length / 30) * 100);
+                },
+                
+                get quranProgressPercentage() {
+                    const completed = this.quranTracker.filter(Boolean).length;
+                    return Math.round((completed / 30) * 100);
+                },
+
+                nextName() {
+                    if (this.currentNameIndex < this.allahNames.length - 1) {
+                        this.currentNameIndex++;
+                    }
+                },
+
+                prevName() {
+                    if (this.currentNameIndex > 0) {
+                        this.currentNameIndex--;
+                    }
                 },
                 
                 resetDeeds() {
