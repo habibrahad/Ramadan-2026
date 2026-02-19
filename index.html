@@ -120,7 +120,7 @@
                         <span class="text-emerald-200 text-sm font-medium">আপনার এলাকা নির্বাচন করুন:</span>
                         <div class="relative">
                             <select x-model="selectedDistrict" @change="saveDistrict()" autocomplete="off"
-                                    class="bg-emerald-100 text-emerald-900 font-bold rounded-lg pl-3 pr-8 py-2 outline-none focus:ring-2 focus:ring-emerald-400 appearance-none cursor-pointer hover:bg-white transition-colors w-48">
+                                    class="bg-emerald-100 text-emerald-900 font-bold rounded-lg pl-3 pr-8 py-2 outline-none focus:ring-2 focus:ring-emerald-400 appearance-none cursor-pointer hover:bg-white transition-colors w-48 font-sans">
                                 <template x-for="d in districts" :key="d.name">
                                     <option :value="d.name" x-text="d.name" :selected="d.name === selectedDistrict"></option>
                                 </template>
@@ -135,18 +135,20 @@
                     <div class="absolute inset-0 bg-emerald-400 rounded-[2rem] blur opacity-20 group-hover:opacity-40 transition-opacity"></div>
                     <div class="glass-panel rounded-[2rem] p-6 text-center w-full md:w-80 shadow-2xl relative">
                         <!-- Date Display -->
-                        <div class="text-emerald-800 font-bold text-lg mb-2 border-b border-emerald-200/50 pb-2" x-text="currentDateString"></div>
+                        <div class="text-emerald-800 font-bold text-lg mb-2 border-b border-emerald-200/50 pb-2 font-sans" x-text="currentDateString"></div>
 
                         <!-- Real Time Clock with Seconds & English AM/PM -->
                         <div class="flex justify-center items-baseline gap-2 mb-2">
-                            <span class="text-4xl lg:text-5xl font-mono font-bold text-emerald-900 tracking-tight" x-text="timeDigits"></span>
+                            <!-- Removed font-mono, added tabular-nums for consistent width if supported -->
+                            <span class="text-4xl lg:text-5xl font-bold text-emerald-900 tracking-tight tabular-nums" x-text="timeDigits"></span>
                             <span class="text-lg font-bold text-emerald-700 font-english uppercase tracking-wider" x-text="timeAmpm"></span>
                         </div>
                         <div class="h-px w-full bg-emerald-200/50 my-4"></div>
                         
                         <div x-show="!countdownText.includes('শুরু হয়নি') && !countdownText.includes('শেষ')" class="space-y-1">
                             <p class="text-slate-500 text-xs font-bold uppercase tracking-widest" x-text="nextEventName + ' বাকি'"></p>
-                            <p class="text-2xl font-bold text-emerald-600 animate-pulse font-mono" x-text="countdownText"></p>
+                            <!-- Removed font-mono -->
+                            <p class="text-2xl font-bold text-emerald-600 animate-pulse tabular-nums" x-text="countdownText"></p>
                         </div>
                         <div x-show="countdownText.includes('শুরু হয়নি')" class="text-orange-600 font-bold animate-pulse">
                             রমজান এখনও শুরু হয়নি
@@ -177,17 +179,23 @@
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
                 রমজান ক্যালেন্ডার
             </button>
+            <button @click="activeTab = 'dua_learning'" 
+                    class="px-6 md:px-8 py-4 rounded-2xl font-bold text-base md:text-lg transition-all duration-300 transform hover:-translate-y-1 shadow-lg flex items-center gap-2"
+                    :class="activeTab === 'dua_learning' ? 'bg-emerald-600 text-white shadow-emerald-200 ring-4 ring-emerald-100' : 'bg-white text-slate-600 hover:bg-slate-50'">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                দোয়া শিক্ষা
+            </button>
             <button @click="activeTab = 'deeds'" 
                     class="px-6 md:px-8 py-4 rounded-2xl font-bold text-base md:text-lg transition-all duration-300 transform hover:-translate-y-1 shadow-lg flex items-center gap-2"
                     :class="activeTab === 'deeds' ? 'bg-emerald-600 text-white shadow-emerald-200 ring-4 ring-emerald-100' : 'bg-white text-slate-600 hover:bg-slate-50'">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path></svg>
-                দৈনন্দিন আমল
+                আমল
             </button>
             <button @click="activeTab = 'tasbeeh'" 
                     class="px-6 md:px-8 py-4 rounded-2xl font-bold text-base md:text-lg transition-all duration-300 transform hover:-translate-y-1 shadow-lg flex items-center gap-2"
                     :class="activeTab === 'tasbeeh' ? 'bg-emerald-600 text-white shadow-emerald-200 ring-4 ring-emerald-100' : 'bg-white text-slate-600 hover:bg-slate-50'">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z"></path></svg>
-                ডিজিটাল তসবিহ
+                তসবিহ
             </button>
         </div>
 
@@ -214,7 +222,8 @@
                     </div>
                     <div>
                         <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">সেহরি শেষ</p>
-                        <h3 class="text-2xl font-bold text-blue-600 font-mono" x-text="todayData ? toBn(adjustTime(todayData.sehri)) : '--:--'"></h3>
+                        <!-- Removed font-mono -->
+                        <h3 class="text-2xl font-bold text-blue-600 tabular-nums" x-text="todayData ? toBn(adjustTime(todayData.sehri)) : '--:--'"></h3>
                     </div>
                 </div>
 
@@ -225,7 +234,8 @@
                     </div>
                     <div>
                         <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">ফজরের আযান</p>
-                        <h3 class="text-2xl font-bold text-cyan-600 font-mono" x-text="todayData ? toBn(adjustTime(todayData.fajr)) : '--:--'"></h3>
+                        <!-- Removed font-mono -->
+                        <h3 class="text-2xl font-bold text-cyan-600 tabular-nums" x-text="todayData ? toBn(adjustTime(todayData.fajr)) : '--:--'"></h3>
                     </div>
                 </div>
 
@@ -236,7 +246,8 @@
                     </div>
                     <div>
                         <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">ইফতার শুরু</p>
-                        <h3 class="text-2xl font-bold text-orange-600 font-mono" x-text="todayData ? toBn(adjustTime(todayData.iftar)) : '--:--'"></h3>
+                        <!-- Removed font-mono -->
+                        <h3 class="text-2xl font-bold text-orange-600 tabular-nums" x-text="todayData ? toBn(adjustTime(todayData.iftar)) : '--:--'"></h3>
                     </div>
                 </div>
             </div>
@@ -247,7 +258,7 @@
                 <div class="bg-white rounded-3xl overflow-hidden shadow-lg border border-emerald-100 group hover:shadow-2xl transition-all duration-300">
                     <div class="bg-emerald-50 px-8 py-4 border-b border-emerald-100 flex justify-between items-center">
                         <h3 class="text-lg font-bold text-emerald-800">রোজার নিয়ত</h3>
-                        <div class="w-8 h-8 rounded-full bg-emerald-200 flex items-center justify-center text-emerald-700 text-xs font-bold">১</div>
+                        <div class="w-8 h-8 rounded-full bg-emerald-200 flex items-center justify-center text-emerald-700 text-xs font-bold font-sans">১</div>
                     </div>
                     <div class="p-8">
                         <p class="font-arabic text-2xl md:text-3xl text-slate-800 text-center leading-loose mb-6">نويت أن أصوم غدا من شهر رمضان المبارك فرضا لك يا الله فتقبل مني إنك أنت السميع العليم</p>
@@ -262,7 +273,7 @@
                 <div class="bg-white rounded-3xl overflow-hidden shadow-lg border border-orange-100 group hover:shadow-2xl transition-all duration-300">
                     <div class="bg-orange-50 px-8 py-4 border-b border-orange-100 flex justify-between items-center">
                         <h3 class="text-lg font-bold text-orange-800">ইফতারের দোয়া</h3>
-                        <div class="w-8 h-8 rounded-full bg-orange-200 flex items-center justify-center text-orange-700 text-xs font-bold">২</div>
+                        <div class="w-8 h-8 rounded-full bg-orange-200 flex items-center justify-center text-orange-700 text-xs font-bold font-sans">২</div>
                     </div>
                     <div class="p-8">
                         <p class="font-arabic text-2xl md:text-3xl text-slate-800 text-center leading-loose mb-6">اللهم لك صمت وعلى رزقك أفطرت</p>
@@ -313,7 +324,7 @@
                     <div class="flex gap-2 w-full xl:w-auto">
                         <div class="relative w-full xl:w-64">
                             <input type="text" x-model="search" placeholder="খুঁজুন (যেমন: ১০)" 
-                                class="w-full pl-10 pr-4 py-3 bg-white rounded-xl shadow-sm border border-slate-200 focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 outline-none transition-all text-sm">
+                                class="w-full pl-10 pr-4 py-3 bg-white rounded-xl shadow-sm border border-slate-200 focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 outline-none transition-all text-sm font-sans">
                             <svg class="w-5 h-5 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
                         </div>
                         <button onclick="window.print()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 p-3 rounded-xl transition-colors" title="Print">
@@ -344,22 +355,27 @@
                                     'bg-purple-50/40 hover:bg-purple-100/50': !isToday(item.date) && item.phase === 'Nazat'
                                 }" class="transition-all border-b border-slate-100">
                                     <td class="py-4 px-6 text-center">
+                                        <!-- Removed font-mono -->
                                         <span class="inline-flex items-center justify-center w-10 h-10 rounded-full font-bold text-lg"
                                             :class="isToday(item.date) ? 'bg-yellow-500 text-white shadow-md shadow-yellow-200' : 'bg-white text-slate-600 shadow-sm'" 
                                             x-text="toBn(item.day)"></span>
                                     </td>
                                     <td class="py-4 px-6">
-                                        <div class="font-bold text-slate-800" x-text="toBn(item.date)"></div>
+                                        <!-- Removed font-mono -->
+                                        <div class="font-bold text-slate-800 tabular-nums" x-text="toBn(item.date)"></div>
                                         <div class="text-sm font-semibold text-slate-500 uppercase" x-text="bnDay(item.dayName)"></div>
                                     </td>
                                     <td class="py-4 px-6">
-                                        <span class="text-xl font-mono font-bold text-blue-600 bg-white/60 px-3 py-1 rounded-lg" x-text="toBn(adjustTime(item.sehri))"></span>
+                                        <!-- Removed font-mono -->
+                                        <span class="text-xl font-bold text-blue-600 bg-white/60 px-3 py-1 rounded-lg tabular-nums" x-text="toBn(adjustTime(item.sehri))"></span>
                                     </td>
                                     <td class="py-4 px-6">
-                                        <span class="text-xl font-mono font-bold text-cyan-600 bg-white/60 px-3 py-1 rounded-lg" x-text="toBn(adjustTime(item.fajr))"></span>
+                                        <!-- Removed font-mono -->
+                                        <span class="text-xl font-bold text-cyan-600 bg-white/60 px-3 py-1 rounded-lg tabular-nums" x-text="toBn(adjustTime(item.fajr))"></span>
                                     </td>
                                     <td class="py-4 px-6">
-                                        <span class="text-xl font-mono font-bold text-orange-600 bg-white/60 px-3 py-1 rounded-lg" x-text="toBn(adjustTime(item.iftar))"></span>
+                                        <!-- Removed font-mono -->
+                                        <span class="text-xl font-bold text-orange-600 bg-white/60 px-3 py-1 rounded-lg tabular-nums" x-text="toBn(adjustTime(item.iftar))"></span>
                                     </td>
                                     <td class="py-4 px-6 text-center">
                                         <span class="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide border shadow-sm" 
@@ -409,19 +425,137 @@
                             <div class="grid grid-cols-3 gap-2">
                                 <div class="bg-white/60 p-2 rounded-xl text-center border border-slate-100">
                                     <div class="text-xs uppercase text-slate-400 font-bold mb-1">সেহরি শেষ</div>
-                                    <div class="text-base font-mono font-bold text-blue-600" x-text="toBn(adjustTime(item.sehri))"></div>
+                                    <!-- Removed font-mono -->
+                                    <div class="text-base font-bold text-blue-600 tabular-nums" x-text="toBn(adjustTime(item.sehri))"></div>
                                 </div>
                                 <div class="bg-white/60 p-2 rounded-xl text-center border border-slate-100">
                                     <div class="text-xs uppercase text-cyan-600/70 font-bold mb-1">ফজরের আযান</div>
-                                    <div class="text-base font-mono font-bold text-cyan-700" x-text="toBn(adjustTime(item.fajr))"></div>
+                                    <!-- Removed font-mono -->
+                                    <div class="text-base font-bold text-cyan-700 tabular-nums" x-text="toBn(adjustTime(item.fajr))"></div>
                                 </div>
                                 <div class="bg-white/60 p-2 rounded-xl text-center border border-slate-100">
                                     <div class="text-xs uppercase text-slate-400 font-bold mb-1">ইফতার শুরু</div>
-                                    <div class="text-base font-mono font-bold text-orange-600" x-text="toBn(adjustTime(item.iftar))"></div>
+                                    <!-- Removed font-mono -->
+                                    <div class="text-base font-bold text-orange-600 tabular-nums" x-text="toBn(adjustTime(item.iftar))"></div>
                                 </div>
                             </div>
                         </div>
                     </template>
+                </div>
+            </div>
+        </div>
+
+        <!-- NEW TAB: DUA LEARNING -->
+        <div x-show="activeTab === 'dua_learning'" class="tab-content" x-cloak>
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center mb-8">
+                    <h2 class="text-3xl font-bold text-slate-800">প্রতিদিনের দোয়া শিক্ষা</h2>
+                    <p class="text-slate-500 mt-2">প্রতিদিন একটি করে ছোট দোয়া শিখুন ও আমল করুন</p>
+                </div>
+
+                <!-- DUA PROGRESS BAR -->
+                <div class="bg-white p-6 rounded-2xl shadow-lg border border-slate-100 mb-8 relative overflow-hidden">
+                    <div class="flex justify-between items-end mb-3 relative z-10">
+                        <div>
+                            <p class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">দোয়া শেখার অগ্রগতি</p>
+                            <div class="flex items-baseline gap-1">
+                                <span class="text-4xl font-bold text-emerald-600" x-text="toBn(duaProgressPercentage)"></span>
+                                <span class="text-xl font-bold text-emerald-600">%</span>
+                                <span class="text-slate-500 font-medium ml-1">সম্পন্ন</span>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                             <button @click="resetDuas()" class="text-xs text-red-500 hover:text-red-700 underline font-semibold mb-1 cursor-pointer">রিসেট করুন</button>
+                             <div class="block">
+                                <span class="text-lg font-bold text-slate-700" x-text="toBn(learnedDuas.length)"></span>
+                                <span class="text-slate-400 text-sm">/</span>
+                                <span class="text-sm font-bold text-slate-500" x-text="toBn(30)"></span>
+                                <span class="text-xs text-slate-400 block mt-0.5">টি দোয়া</span>
+                             </div>
+                        </div>
+                    </div>
+                    
+                    <div class="w-full bg-slate-100 rounded-full h-4 overflow-hidden relative z-10 shadow-inner">
+                        <div class="bg-gradient-to-r from-emerald-500 to-emerald-400 h-full rounded-full transition-all duration-700 ease-out flex items-center justify-end pr-1"
+                             :style="`width: ${duaProgressPercentage}%`">
+                             <div class="w-1.5 h-1.5 bg-white/30 rounded-full" x-show="duaProgressPercentage > 0"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-[2.5rem] shadow-2xl border border-slate-200 overflow-hidden relative min-h-[500px] flex flex-col">
+                    <!-- Top Decorative Bar -->
+                    <div class="h-4 bg-gradient-to-r from-emerald-500 via-teal-500 to-emerald-600"></div>
+
+                    <!-- Content Area -->
+                    <div class="p-8 md:p-12 flex-grow flex flex-col justify-center items-center text-center relative z-10">
+                        
+                        <!-- Day Badge -->
+                        <div class="mb-8 flex flex-col items-center gap-4">
+                            <span class="inline-flex items-center gap-2 px-6 py-2 rounded-full bg-emerald-100 text-emerald-800 font-bold text-lg shadow-sm border border-emerald-200">
+                                <span x-text="toBn(currentDuaIndex + 1)"></span> তম রমজান
+                            </span>
+
+                            <!-- LEARNED TOGGLE BUTTON -->
+                            <button @click="toggleDuaLearned(currentDuaIndex)" 
+                                    class="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-bold transition-all border-2"
+                                    :class="isDuaLearned(currentDuaIndex) ? 'bg-emerald-50 border-emerald-500 text-emerald-700' : 'bg-white border-slate-200 text-slate-400 hover:border-slate-300 hover:text-slate-600'">
+                                <div class="w-5 h-5 rounded-full border-2 flex items-center justify-center transition-colors"
+                                     :class="isDuaLearned(currentDuaIndex) ? 'bg-emerald-500 border-emerald-500' : 'border-slate-300'">
+                                    <svg x-show="isDuaLearned(currentDuaIndex)" class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                                </div>
+                                <span x-text="isDuaLearned(currentDuaIndex) ? 'মুখস্থ হয়েছে' : 'মুখস্থ মার্ক করুন'"></span>
+                            </button>
+                        </div>
+
+                        <!-- Arabic -->
+                        <h3 class="font-arabic text-3xl md:text-5xl text-slate-800 leading-loose mb-8 drop-shadow-sm px-4"
+                            x-text="dailyDuas[currentDuaIndex].arabic"></h3>
+
+                        <!-- Pronunciation -->
+                        <div class="mb-6 max-w-2xl bg-slate-50 p-4 rounded-xl border border-slate-100 w-full">
+                            <p class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">উচ্চারণ</p>
+                            <p class="text-lg md:text-xl text-slate-700 font-medium" x-text="dailyDuas[currentDuaIndex].pronunciation"></p>
+                        </div>
+
+                        <!-- Meaning -->
+                        <div class="max-w-2xl w-full">
+                            <p class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">অর্থ</p>
+                            <p class="text-lg text-slate-600 italic leading-relaxed" x-text="dailyDuas[currentDuaIndex].meaning"></p>
+                        </div>
+                        
+                        <!-- Reference -->
+                         <div class="mt-8 text-sm text-slate-400 font-medium border-t border-slate-100 pt-4 w-full">
+                            উৎস: <span x-text="dailyDuas[currentDuaIndex].source"></span>
+                        </div>
+                    </div>
+
+                    <!-- Navigation Controls -->
+                    <div class="bg-slate-50 p-6 border-t border-slate-200 flex justify-between items-center">
+                        <button @click="prevDua()" 
+                                class="flex items-center gap-2 px-6 py-3 rounded-xl font-bold transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                                :class="currentDuaIndex === 0 ? 'bg-slate-200 text-slate-400' : 'bg-white text-slate-700 shadow-md hover:bg-emerald-50 hover:text-emerald-700'"
+                                :disabled="currentDuaIndex === 0">
+                            <svg class="w-5 h-5 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                            <span class="hidden md:inline">পূর্ববর্তী দিন</span>
+                        </button>
+
+                        <div class="flex gap-1">
+                             <template x-for="i in 5">
+                                 <div class="w-2 h-2 rounded-full transition-colors" 
+                                      :class="(currentDuaIndex % 5) === (i-1) ? 'bg-emerald-500' : 'bg-slate-300'"></div>
+                             </template>
+                        </div>
+
+                        <button @click="nextDua()" 
+                                class="flex items-center gap-2 px-6 py-3 rounded-xl font-bold transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                                :class="currentDuaIndex === 29 ? 'bg-slate-200 text-slate-400' : 'bg-emerald-600 text-white shadow-lg hover:bg-emerald-700 hover:shadow-emerald-200'"
+                                :disabled="currentDuaIndex === 29">
+                            <span class="hidden md:inline">পরবর্তী দিন</span>
+                            <span class="md:hidden">পরবর্তী</span>
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -524,7 +658,8 @@
                     
                     <!-- Display -->
                     <div class="bg-slate-800 rounded-2xl p-6 mb-8 shadow-inner relative z-10 border-4 border-slate-300">
-                        <div class="text-6xl font-mono font-bold text-emerald-400 tabular-nums" x-text="toBn(tasbeehCount)"></div>
+                        <!-- Removed font-mono -->
+                        <div class="text-6xl font-bold text-emerald-400 tabular-nums" x-text="toBn(tasbeehCount)"></div>
                         <div class="text-xs text-slate-500 mt-2 uppercase tracking-widest">মোট পাঠ</div>
                     </div>
                     
@@ -634,7 +769,7 @@
                 </div>
 
                 <h3 class="text-xl font-bold text-slate-800 mb-2 text-center">আপনি কি নিশ্চিত?</h3>
-                <p class="text-slate-500 text-center mb-6 text-sm">আপনার সকল আমলের অগ্রগতি মুছে ফেলা হবে। এই কাজটি আর ফিরিয়ে আনা যাবে না।</p>
+                <p class="text-slate-500 text-center mb-6 text-sm" x-text="resetTarget === 'deeds' ? 'আপনার সকল আমলের অগ্রগতি মুছে ফেলা হবে। এই কাজটি আর ফিরিয়ে আনা যাবে না।' : 'আপনার সকল মুখস্থ দোয়ার অগ্রগতি মুছে ফেলা হবে। এই কাজটি আর ফিরিয়ে আনা যাবে না।'">আপনার সকল আমলের অগ্রগতি মুছে ফেলা হবে। এই কাজটি আর ফিরিয়ে আনা যাবে না।</p>
                 
                 <div class="flex gap-3">
                     <button @click="showResetModal = false" class="flex-1 px-4 py-3 rounded-xl text-slate-600 bg-slate-100 hover:bg-slate-200 font-bold transition-colors">বাতিল</button>
@@ -701,9 +836,12 @@
                 nextEventName: '',
                 nowDate: new Date(),
                 completedDeeds: JSON.parse(localStorage.getItem('completedDeeds')) || [],
+                learnedDuas: JSON.parse(localStorage.getItem('learnedDuas')) || [],
                 tasbeehCount: 0,
                 showResetModal: false,
+                resetTarget: 'deeds',
                 showDonateModal: false,
+                currentDuaIndex: 0,
 
                 // BD Data (Starts Feb 19)
                 bdRamadanData: [
@@ -839,6 +977,39 @@
                     { name: 'Faridpur', offset: 3 }
                 ],
 
+                dailyDuas: [
+                    { day: 1, arabic: "رَبِّ اغْفِرْ وَارْحَمْ وَأَنْتَ خَيْرُ الرَّاحِمِينَ", pronunciation: "রাব্বিগফির ওয়ারহাম ওয়া আনতা খাইরুর রাহিমীন", meaning: "হে আমার রব! আমাকে ক্ষমা করুন ও দয়া করুন, আপনিই তো সর্বশ্রেষ্ঠ দয়ালু।", source: "সূরা মুমিনুন: ১১৮" },
+                    { day: 2, arabic: "رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ", pronunciation: "রাব্বানা আতিনা ফিদ-দুনিয়া হাসানাহ, ওয়া ফিল আখিরাতি হাসানাহ, ওয়া কিনা আযাবান নার", meaning: "হে আমাদের রব! আমাদের দুনিয়াতে কল্যাণ দিন এবং আখেরাতেও কল্যাণ দিন এবং আমাদের আগুনের শাস্তি থেকে রক্ষা করুন।", source: "সূরা বাকারা: ২০১" },
+                    { day: 3, arabic: "رَبِّ هَبْ لِي مِن لَّدُنكَ ذُرِّيَّةً طَيِّبَةً ۖ إِنَّكَ سَمِيعُ الدُّعَاءِ", pronunciation: "রাব্বি হাবলি মিল্লাদুনকা জুররিয়্যাতান ত্বাইয়িবাহ, ইন্নাকা সামিউদ দুআ", meaning: "হে আমার রব! আমাকে আপনার পক্ষ থেকে পবিত্র সন্তান দান করুন। নিশ্চয়ই আপনি প্রার্থনা শ্রবণকারী।", source: "সূরা আলে-ইমরান: ৩৮" },
+                    { day: 4, arabic: "لَّا إِلَٰهَ إِلَّا أَنتَ سُبْحَانَكَ إِنِّي كُنتُ مِنَ الظَّالِمِينَ", pronunciation: "লা ইলাহা ইল্লা আনতা সুবহানাকা ইন্নি কুনতু মিনাজ জালিমীন", meaning: "আপনি ছাড়া কোনো ইলাহ নেই, আপনি পবিত্র। নিশ্চয়ই আমি জালিমদের অন্তর্ভুক্ত।", source: "সূরা আম্বিয়া: ৮৭" },
+                    { day: 5, arabic: "رَبِّ اجْعَلْنِي مُقِيمَ الصَّلَاةِ وَمِن ذُرِّيَّتِي ۚ رَبَّنَا وَتَقَبَّلْ دُعَاءِ", pronunciation: "রাব্বিজ-আলনী মুকিমাস সালাতি ওয়া মিন জুররিয়্যাতী, রাব্বানা ওয়া তাকাব্বাল দুআ", meaning: "হে আমার রব! আমাকে নামাজ কায়েমকারী বানান এবং আমার বংশধরদের মধ্য থেকেও। হে আমাদের রব! আমার দোয়া কবুল করুন।", source: "সূরা ইব্রাহিম: ৪০" },
+                    { day: 6, arabic: "رَبَّنَا لَا تُزِغْ قُلُوبَنَا بَعْدَ إِذْ هَدَيْتَنَا وَهَبْ لَنَا مِن لَّدُنكَ رَحْمَةً", pronunciation: "রাব্বানা লা তুযিগ কুলুবানা বা’দা ইয হাদাইতানা ওয়া হাবলানা মিল্লাদুনকা রাহমাহ", meaning: "হে আমাদের রব! হেদায়াত দেওয়ার পর আমাদের অন্তরকে বক্র করবেন না এবং আপনার পক্ষ থেকে আমাদের রহমত দান করুন।", source: "সূরা আলে-ইমরান: ৮" },
+                    { day: 7, arabic: "اللَّهُمَّ إِنِّي أَسْأَلُكَ الْهُدَى وَالتُّقَى وَالْعَفَافَ وَالْغِنَى", pronunciation: "আল্লাহুম্মা ইন্নি আসআলুকাল হুদা, ওয়াত তুকা, ওয়াল আফাফা, ওয়াল গিনা", meaning: "হে আল্লাহ! আমি আপনার কাছে হেদায়াত, তাকওয়া, পবিত্রতা এবং সচ্ছলতা প্রার্থনা করছি।", source: "সহীহ মুসলিম" },
+                    { day: 8, arabic: "يَا مُقَلِّبَ الْقُلُوبِ ثَبِّتْ قَلْبِي عَلَى دِينِكَ", pronunciation: "ইয়া মুকাল্লিবাল কুলুব, সাব্বিত কালবি আলা দীনিক", meaning: "হে অন্তর পরিবর্তনকারী! আমার অন্তরকে আপনার দ্বীনের ওপর অবিচল রাখুন।", source: "তিরমিযি" },
+                    { day: 9, arabic: "رَبِّ اشْرَحْ لِي صَدْرِي وَيَسِّرْ لِي أَمْرِي", pronunciation: "রাব্বিশরাহ লি সাদরি ওয়া ইয়াসসির লি আমরি", meaning: "হে আমার রব! আমার বক্ষ প্রশস্ত করে দিন এবং আমার কাজ সহজ করে দিন।", source: "সূরা ত্বহা: ২৫-২৬" },
+                    { day: 10, arabic: "اللَّهُمَّ اجْعَلْ فِي قَلْبِي نُورًا وَفِي بَصَرِي نُورًا", pronunciation: "আল্লাহুম্মাজ আল ফি কালবি নূরা, ওয়া ফি বাসারি নূরা", meaning: "হে আল্লাহ! আমার অন্তরে আলো দিন এবং আমার দৃষ্টিতে আলো দিন।", source: "বুখারী" },
+                    { day: 11, arabic: "أَسْتَغْفِرُ اللّٰهَ الَّذِي لَا إِلٰهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ وَأَتُوبُ إِلَيْهِ", pronunciation: "আস্তাগফিরুল্লাহাল লাজি লা ইলাহা ইল্লা হুয়াল হাইয়ুল কাইয়ুমু ওয়া আতুবু ইলাইহি", meaning: "আমি আল্লাহর কাছে ক্ষমা প্রার্থনা করছি, যিনি ছাড়া কোনো ইলাহ নেই, যিনি চিরঞ্জীব ও সবকিছুর ধারক এবং আমি তাঁর দিকেই ফিরে যাচ্ছি।", source: "আবু দাউদ" },
+                    { day: 12, arabic: "اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْهَمِّ وَالْحَزَنِ", pronunciation: "আল্লাহুম্মা ইন্নি আউযুবিকা মিনাল হাম্মি ওয়াল হাযানি", meaning: "হে আল্লাহ! আমি দুশ্চিন্তা ও দুঃখ থেকে আপনার কাছে আশ্রয় চাই।", source: "বুখারী" },
+                    { day: 13, arabic: "رَبَّنَا هَبْ لَنَا مِنْ أَزْوَاجِنَا وَذُرِّيَّاتِنَا قُرَّةَ أَعْيُنٍ", pronunciation: "রাব্বানা হাবলানা মিন আযওয়াজিনা ওয়া জুররিয়্যাতিনা কুররাতা আ’ইউন", meaning: "হে আমাদের রব! আমাদের স্ত্রী ও সন্তানদের আমাদের জন্য চোখের শীতলতা স্বরূপ করুন।", source: "সূরা ফুরকান: ৭৪" },
+                    { day: 14, arabic: "اللَّهُمَّ اكْفِنِي بِحَلَالِكَ عَنْ حَرَامِكَ", pronunciation: "আল্লাহুম্মাকফিনি বিহালালিকা আন হারামিকা", meaning: "হে আল্লাহ! আপনার হালাল রিজিক দিয়ে আমাকে হারাম থেকে রক্ষা করুন।", source: "তিরমিযি" },
+                    { day: 15, arabic: "رَبِّ زِدْنِي عِلْمًا", pronunciation: "রাব্বি যিদনি ইলমা", meaning: "হে আমার রব! আমার জ্ঞান বৃদ্ধি করে দিন।", source: "সূরা ত্বহা: ১১৪" },
+                    { day: 16, arabic: "اللَّهُمَّ عَافِنِي فِي بَدَنِي، اللَّهُمَّ عَافِنِي فِي سَمْعِي", pronunciation: "আল্লাহুম্মা আফিনি ফি বাদানি, আল্লাহুম্মা আফিনি ফি সাময়ি", meaning: "হে আল্লাহ! আমার শরীর সুস্থ রাখুন, হে আল্লাহ! আমার শ্রবণশক্তি সুস্থ রাখুন।", source: "আবু দাউদ" },
+                    { day: 17, arabic: "رَبِّ إِنِّي لِمَا أَنزَلْتَ إِلَيَّ مِنْ خَيْرٍ فَقِيرٌ", pronunciation: "রাব্বি ইন্নি লিমা আনযালতা ইলাইয়্যা মিন খাইরিন ফাকির", meaning: "হে আমার রব! আপনি আমার প্রতি যে কল্যাণই নাজিল করবেন, আমি তার ভিখারি।", source: "সূরা কাসাস: ২৪" },
+                    { day: 18, arabic: "اللَّهُمَّ إِنِّي أَسْأَلُكَ الْجَنَّةَ وَأَعُوذُ بِكَ مِنَ النَّارِ", pronunciation: "আল্লাহুম্মা ইন্নি আসআলুকাল জান্নাতা ওয়া আউযুবিকা মিনান নার", meaning: "হে আল্লাহ! আমি আপনার কাছে জান্নাত চাই এবং জাহান্নাম থেকে আশ্রয় চাই।", source: "আবু দাউদ" },
+                    { day: 19, arabic: "رَبَّنَا أَتْمِمْ لَنَا نُورَنَا وَاغْفِرْ لَنَا", pronunciation: "রাব্বানা আতমিম লানা নূরানা ওয়াগফির লানা", meaning: "হে আমাদের রব! আমাদের জন্য আমাদের আলো পূর্ণ করে দিন এবং আমাদের ক্ষমা করুন।", source: "সূরা তাহরিম: ৮" },
+                    { day: 20, arabic: "اللَّهُمَّ مُصَرِّفَ الْقُلُوبِ صَرِّفْ قُلُوبَنَا عَلَى طَاعَتِكَ", pronunciation: "আল্লাহুম্মা মুসাররিফাল কুলুবি সাররিফ কুলুবানা আলা তায়াতিক", meaning: "হে অন্তর পরিবর্তনকারী আল্লাহ! আমাদের অন্তরকে আপনার আনুগত্যের দিকে ঘুরিয়ে দিন।", source: "মুসলিম" },
+                    { day: 21, arabic: "اللَّهُمَّ إِنَّكَ عَفُوٌّ تُحِبُّ الْعَفْوَ فَاعْفُ عَنِّي", pronunciation: "আল্লাহুম্মা ইন্নাকা আফুউন তুহিব্বুল আফওয়া ফা’ফু আন্নী", meaning: "হে আল্লাহ! আপনি ক্ষমাশীল, ক্ষমা করতে ভালোবাসেন, তাই আমাকে ক্ষমা করুন। (শবে কদরের দোয়া)", source: "তিরমিযি" },
+                    { day: 22, arabic: "رَبِّ أَوْزِعْنِي أَنْ أَشْكُرَ نِعْمَتَكَ الَّتِي أَنْعَمْتَ عَلَيَّ", pronunciation: "রাব্বি আওযি’নি আন আশকুরা নি’মাতাকাল্লাতি আন’আমতা আলাইয়্যা", meaning: "হে আমার রব! আমাকে তৌফিক দিন যেন আমি আপনার নেয়ামতের শুকরিয়া আদায় করতে পারি।", source: "সূরা নামল: ১৯" },
+                    { day: 23, arabic: "اللَّهُمَّ لَا سَهْلَ إِلَّا مَا جَعَلْتَهُ سَهْلًا", pronunciation: "আল্লাহুম্মা লা সাহলা ইল্লা মা জাআলতাহু সাহলা", meaning: "হে আল্লাহ! আপনি যা সহজ করেন তা ছাড়া কোনো কিছুই সহজ নয়।", source: "ইবনে হিব্বান" },
+                    { day: 24, arabic: "رَبَّنَا تَقَبَّلْ مِنَّا إِنَّكَ أَنْتَ السَّمِيعُ الْعَلِيمُ", pronunciation: "রাব্বানা তাকাব্বাল মিন্না ইন্নাকা আনতাস সামীউল আলীম", meaning: "হে আমাদের রব! আমাদের পক্ষ থেকে (এই আমল) কবুল করুন, নিশ্চয়ই আপনি সর্বশ্রোতা ও সর্বজ্ঞ।", source: "সূরা বাকারা: ১২৭" },
+                    { day: 25, arabic: "رَبِّ ارْحَمْهُمَا كَمَا رَبَّيَانِي صَغِيرًا", pronunciation: "রাব্বিরহামহুমা কামা রাব্বায়ানি সাগিরা", meaning: "হে আমার রব! তাদের (পিতা-মাতার) প্রতি দয়া করুন, যেমন তারা আমাকে ছোটবেলায় লালন-পালন করেছেন।", source: "সূরা বনী ইসরাঈল: ২৪" },
+                    { day: 26, arabic: "سُبْحَانَ اللَّهِ وَبِحَمْدِهِ سُبْحَانَ اللَّهِ الْعَظِيمِ", pronunciation: "সুবহানাল্লাহি ওয়া বিহামদিহি সুবহানাল্লাহিল আজিম", meaning: "আল্লাহ পবিত্র এবং তাঁর প্রশংসা করছি, মহান আল্লাহ পবিত্র।", source: "বুখারী" },
+                    { day: 27, arabic: "اللَّهُمَّ إِنِّي أَسْأَلُكَ حُسْنَ الْخَاتِمَةِ", pronunciation: "আল্লাহুম্মা ইন্নি আসআলুকা হুসনাল খাতিমাহ", meaning: "হে আল্লাহ! আমি আপনার কাছে সুন্দর মৃত্যু (ঈমানের সাথে মৃত্যু) কামনা করছি।", source: "প্রচলিত দোয়া" },
+                    { day: 28, arabic: "رَبَّنَا عَلَيْكَ تَوَكَّلْنَا وَإِلَيْكَ أَنَبْنَا وَإِلَيْكَ الْمَصِيرُ", pronunciation: "রাব্বানা আলাইকা তাওয়াক্কালনা ওয়া ইলাইকা আনাবনা ওয়া ইলাইকাল মাসির", meaning: "হে আমাদের রব! আমরা আপনার ওপরই ভরসা করেছি, আপনার দিকেই ফিরেছি এবং আপনার কাছেই আমাদের প্রত্যাবর্তন।", source: "সূরা মুমতাহিনা: ৪" },
+                    { day: 29, arabic: "اللَّهُمَّ أَجِرْنِي مِنَ النَّارِ", pronunciation: "আল্লাহুম্মা আজিরনি মিনান নার", meaning: "হে আল্লাহ! আমাকে জাহান্নামের আগুন থেকে মুক্তি দিন।", source: "আবু দাউদ" },
+                    { day: 30, arabic: "رَبَّنَا لَا تُؤَاخِذْنَا إِن نَّسِينَا أَوْ أَخْطَأْنَا", pronunciation: "রাব্বানা লা তুআখিজনা ইন নাসিনা আও আখতানা", meaning: "হে আমাদের রব! যদি আমরা ভুলে যাই বা ভুল করি, তবে আমাদের পাকড়াও করবেন না।", source: "সূরা বাকারা: ২৮৬" }
+                ],
+
                 dailyDeeds: [
                     { task: "আজকের দিনে অন্তত ১০ বার সুরা ইখলাস পাঠ করুন।", ref: "কুরআন তিলাওয়াত", hadith: "রাসূল (সা.) বলেছেন, 'সূরা ইখলাস কুরআনের এক-তৃতীয়াংশের সমান।' (বুখারী)" },
                     { task: "একজন রোজাদারকে ইফতার করানোর চেষ্টা করুন।", ref: "দান-সদকা", hadith: "রাসূল (সা.) বলেছেন, 'যে ব্যক্তি কোনো রোজাদারকে ইফতার করাবে, সে তার সমান সওয়াব পাবে।' (তিরমিজি)" },
@@ -866,7 +1037,7 @@
                     { task: "কুরআনের অর্থ ও ব্যাখ্যা পড়ার চেষ্টা করুন।", ref: "ইলম চর্চা", hadith: "রাসূল (সা.) বলেছেন, 'জ্ঞান অন্বেষণ করা প্রত্যেক মুসলিমের ওপর ফরজ।' (ইবনে মাজাহ)" },
                     { task: "অসুস্থ কাউকে দেখতে যান।", ref: "সামাজিক", hadith: "রাসূল (সা.) বলেছেন, 'যখন কোনো মুসলিম তার অসুস্থ ভাইকে দেখতে যায়, সে ফিরে আসা পর্যন্ত জান্নাতের বাগানে বিচরণ করতে থাকে।' (মুসলিম)" },
                     { task: "নিজের রাগ নিয়ন্ত্রণ করুন।", ref: "আত্মশুদ্ধি", hadith: "রাসূল (সা.) বলেছেন, 'সে ব্যক্তি শক্তিশালী নয় যে কুস্তিতে জয়ী হয়, বরং সেই শক্তিশালী যে রাগের সময় নিজেকে নিয়ন্ত্রণ করতে পারে।' (বুখারী)" },
-                    { task: "সাদকাতুল ফিতর আদায়ের প্রস্তুতি নিন।", ref: "দান-সদকা", hadith: "রাসূল (সা.) রোজাদারের অনর্থক কথা ও কাজ থেকে পবিত্র করার জন্য এবং মিসকিনদের খাবারের ব্যবস্থা হিসেবে ফিতরা ফরজ করেছেন। (আবু দাউদ)" },
+                    { task: "সাদকাতুল ফিতর আদায়ের প্রস্তুতি নিন।", ref: "দান-সদকা", hadith: "রাসূল (সা.) রোজাদারের অনর্থক কথা ও কাজ থেকে পবিত্র করার জন্য এবং মিসকিনদের খাবারের ব্যবস্থা হিসেবে ফিতরা ফরজ করেছেন. (আবু দাউদ)" },
                     { task: "আল্লাহর নেয়ামতের শুকরিয়া আদায় করুন।", ref: "শুকরিয়া", hadith: "আল্লাহ বলেন, 'যদি তোমরা শুকরিয়া আদায় করো, তবে আমি অবশ্যই তোমাদের নেয়ামত বাড়িয়ে দেব।' (সূরা ইব্রাহিম: ৭)" },
                     { task: "আগামী ঈদের জন্য কাউকে উপহার দিন।", ref: "সামাজিক", hadith: "রাসূল (সা.) বলেছেন, 'তোমরা একে অপরকে উপহার দাও, এতে তোমাদের মধ্যে ভালোবাসা সৃষ্টি হবে।' (বুখারী)" },
                     { task: "রমজানের শিক্ষা সারা বছর ধরে রাখার নিয়ত করুন।", ref: "নিয়ত", hadith: "রাসূল (সা.) বলেছেন, 'আমল তো নিয়তের ওপর নির্ভরশীল।' (বুখারী)" }
@@ -890,14 +1061,42 @@
                     }
                     localStorage.setItem('completedDeeds', JSON.stringify(this.completedDeeds));
                 },
+
+                toggleDuaLearned(index) {
+                    if (this.learnedDuas.includes(index)) {
+                        this.learnedDuas = this.learnedDuas.filter(i => i !== index);
+                    } else {
+                        this.learnedDuas.push(index);
+                    }
+                    localStorage.setItem('learnedDuas', JSON.stringify(this.learnedDuas));
+                },
+                
+                isDuaLearned(index) {
+                    return this.learnedDuas.includes(index);
+                },
+
+                get duaProgressPercentage() {
+                    return Math.round((this.learnedDuas.length / 30) * 100);
+                },
                 
                 resetDeeds() {
+                    this.resetTarget = 'deeds';
+                    this.showResetModal = true;
+                },
+
+                resetDuas() {
+                    this.resetTarget = 'duas';
                     this.showResetModal = true;
                 },
 
                 confirmReset() {
-                    this.completedDeeds = [];
-                    localStorage.setItem('completedDeeds', JSON.stringify([]));
+                    if (this.resetTarget === 'deeds') {
+                        this.completedDeeds = [];
+                        localStorage.setItem('completedDeeds', JSON.stringify([]));
+                    } else if (this.resetTarget === 'duas') {
+                        this.learnedDuas = [];
+                        localStorage.setItem('learnedDuas', JSON.stringify([]));
+                    }
                     this.showResetModal = false;
                 },
                 
@@ -908,6 +1107,14 @@
                 
                 resetTasbeeh() {
                      this.tasbeehCount = 0;
+                },
+                
+                nextDua() {
+                    if (this.currentDuaIndex < 29) this.currentDuaIndex++;
+                },
+                
+                prevDua() {
+                    if (this.currentDuaIndex > 0) this.currentDuaIndex--;
                 },
                 
                 isDeedCompleted(index) {
@@ -931,11 +1138,6 @@
                 updateTime() {
                     this.nowDate = new Date();
                     
-                    // For Seattle, we might want to show Seattle specific timezone eventually, 
-                    // but for now, we show local system time. 
-                    // To show Seattle time, we would need to offset UTC.
-                    // But keeping it simple to system time is usually expected for "My Time".
-                    
                     let hours = this.nowDate.getHours();
                     let minutes = this.nowDate.getMinutes();
                     let seconds = this.nowDate.getSeconds();
@@ -948,7 +1150,6 @@
                     this.timeAmpm = ampm;
 
                     const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-                    // If in Seattle mode, we might want English date, but keeping consistency with Bangla interface
                     let dateStr = this.nowDate.toLocaleDateString('bn-BD', options);
                     this.currentDateString = dateStr;
 
@@ -1012,8 +1213,6 @@
                 get todayData() {
                     const months = { 'Jan': 0, 'Feb': 1, 'Mar': 2, 'Apr': 3, 'May': 4, 'Jun': 5, 'Jul': 6, 'Aug': 7, 'Sep': 8, 'Oct': 9, 'Nov': 10, 'Dec': 11 };
                     const now = new Date();
-                    
-                    // Use activeData instead of hardcoded list
                     return this.activeData.find(d => {
                         const parts = d.date.split(' ');
                         const day = parseInt(parts[0]);
@@ -1024,7 +1223,6 @@
 
                 get filteredData() {
                     let data = this.activeData;
-                    
                     if (this.ashraFilter === 1) data = data.filter(d => d.day <= 10);
                     if (this.ashraFilter === 2) data = data.filter(d => d.day > 10 && d.day <= 20);
                     if (this.ashraFilter === 3) data = data.filter(d => d.day > 20);
@@ -1043,7 +1241,6 @@
 
                 adjustTime(timeStr) {
                     const dist = this.districts.find(d => d.name === this.selectedDistrict);
-                    // If district is Seattle (or any 'offset' that is not a number), return raw time
                     if (!dist || typeof dist.offset !== 'number') return timeStr;
 
                     const offset = dist.offset;
