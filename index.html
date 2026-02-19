@@ -477,6 +477,7 @@
                             </div>
                         </div>
                         <div class="text-right">
+                             <button @click="resetQuran()" class="text-xs text-red-500 hover:text-red-700 underline font-semibold mb-1 cursor-pointer">রিসেট করুন</button>
                              <div class="block">
                                 <span class="text-lg font-bold text-slate-700" x-text="toBn(quranTracker.filter(Boolean).length)"></span>
                                 <span class="text-slate-400 text-sm">/</span>
@@ -908,7 +909,7 @@
                 </div>
 
                 <h3 class="text-xl font-bold text-slate-800 mb-2 text-center">আপনি কি নিশ্চিত?</h3>
-                <p class="text-slate-500 text-center mb-6 text-sm" x-text="resetTarget === 'deeds' ? 'আপনার সকল আমলের অগ্রগতি মুছে ফেলা হবে। এই কাজটি আর ফিরিয়ে আনা যাবে না।' : 'আপনার সকল মুখস্থ দোয়ার অগ্রগতি মুছে ফেলা হবে। এই কাজটি আর ফিরিয়ে আনা যাবে না।'">আপনার সকল আমলের অগ্রগতি মুছে ফেলা হবে। এই কাজটি আর ফিরিয়ে আনা যাবে না।</p>
+                <p class="text-slate-500 text-center mb-6 text-sm" x-text="resetModalMessage">আপনার সকল আমলের অগ্রগতি মুছে ফেলা হবে। এই কাজটি আর ফিরিয়ে আনা যাবে না।</p>
                 
                 <div class="flex gap-3">
                     <button @click="showResetModal = false" class="flex-1 px-4 py-3 rounded-xl text-slate-600 bg-slate-100 hover:bg-slate-200 font-bold transition-colors">বাতিল</button>
@@ -1266,6 +1267,13 @@
                     return Math.round((completed / 30) * 100);
                 },
 
+                get resetModalMessage() {
+                    if (this.resetTarget === 'deeds') return 'আপনার সকল আমলের অগ্রগতি মুছে ফেলা হবে। এই কাজটি আর ফিরিয়ে আনা যাবে না।';
+                    if (this.resetTarget === 'duas') return 'আপনার সকল মুখস্থ দোয়ার অগ্রগতি মুছে ফেলা হবে। এই কাজটি আর ফিরিয়ে আনা যাবে না।';
+                    if (this.resetTarget === 'quran') return 'আপনার কুরআন খতমের অগ্রগতি মুছে ফেলা হবে। এই কাজটি আর ফিরিয়ে আনা যাবে না।';
+                    return '';
+                },
+
                 nextName() {
                     if (this.currentNameIndex < this.allahNames.length - 1) {
                         this.currentNameIndex++;
@@ -1288,6 +1296,11 @@
                     this.showResetModal = true;
                 },
 
+                resetQuran() {
+                    this.resetTarget = 'quran';
+                    this.showResetModal = true;
+                },
+
                 confirmReset() {
                     if (this.resetTarget === 'deeds') {
                         this.completedDeeds = [];
@@ -1295,6 +1308,9 @@
                     } else if (this.resetTarget === 'duas') {
                         this.learnedDuas = [];
                         localStorage.setItem('learnedDuas', JSON.stringify([]));
+                    } else if (this.resetTarget === 'quran') {
+                        this.quranTracker = Array(30).fill(false);
+                        localStorage.setItem('quranTracker', JSON.stringify(this.quranTracker));
                     }
                     this.showResetModal = false;
                 },
